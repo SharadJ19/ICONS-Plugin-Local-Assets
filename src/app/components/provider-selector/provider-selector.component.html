@@ -1,0 +1,27 @@
+<!-- src/app/components/provider-selector/provider-selector.component.html -->
+<div class="provider-selector" [class.compact]="compact">
+  <button
+    class="filter-btn"
+    (click)="toggleDropdown()"
+    [attr.aria-expanded]="isDropdownOpen"
+  >
+    <mat-icon class="filter-icon">filter_list</mat-icon>
+    <span>{{ selectedDisplayName }}</span>
+    <mat-icon class="dropdown-icon">arrow_drop_down</mat-icon>
+  </button>
+
+  <div class="dropdown" *ngIf="isDropdownOpen" [class.open]="isDropdownOpen">
+    <button
+      *ngFor="let provider of providers"
+      (click)="selectProvider(provider.name)"
+      [class.active]="selectedProvider === provider.name"
+      class="dropdown-item"
+      type="button"
+    >
+      <span class="provider-name">{{ provider.displayName }}</span>
+      <mat-icon *ngIf="selectedProvider === provider.name" class="check-icon">
+        check
+      </mat-icon>
+    </button>
+  </div>
+</div>

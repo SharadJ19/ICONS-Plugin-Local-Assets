@@ -1,0 +1,74 @@
+/* src/app/components/loading-spinner/loading-spinner.component.css */
+:host {
+  display: block;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  gap: 16px;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.spinner-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  color: #ff9100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  transform-origin: center;
+}
+
+.message {
+  font-size: 14px;
+  color: #64748b;
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Size variations */
+:host-context(.small) .spinner-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+
+:host-context(.small) .message {
+  font-size: 12px;
+}
+
+:host-context(.large) .spinner-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+}
+
+:host-context(.large) .message {
+  font-size: 16px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

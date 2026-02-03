@@ -1,0 +1,20 @@
+<!-- src/app/components/icon-card/icon-card.component.html -->
+<div class="icon-card">
+  <div class="icon-preview" [innerHTML]="svgContent"></div>
+
+  <div class="icon-overlay">
+    <div class="icon-name">{{ icon.displayName }}</div>
+    <div class="icon-actions">
+      <button
+        mat-icon-button
+        class="download-btn"
+        (click)="onDownload()"
+        matTooltip="Download SVG"
+        aria-label="Download icon"
+      >
+        <mat-icon>download</mat-icon>
+      </button>
+      <span class="provider-badge">{{ icon.provider }}</span>
+    </div>
+  </div>
+</div>
