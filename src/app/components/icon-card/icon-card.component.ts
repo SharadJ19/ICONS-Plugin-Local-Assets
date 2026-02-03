@@ -10,6 +10,8 @@ import {
 import { Icon } from '../../core/models/icon.model';
 import { DownloadService } from '../../core/services/download.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ProviderRegistryService } from '../../core/services/providers/provider-registry.service';
+import { SelectionService } from '../../core/services/selection.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -23,16 +25,27 @@ export class IconCardComponent implements OnInit, OnDestroy {
   @Output() download = new EventEmitter<Icon>();
 
   svgContent: SafeHtml = '';
+  isLoading = true;
+  isSelected = false;
 
   private destroy$ = new Subject<void>();
 
   constructor(
     private downloadService: DownloadService,
     private sanitizer: DomSanitizer,
+    private providerRegistry: ProviderRegistryService,
+    private selectionService: SelectionService
   ) {}
 
   ngOnInit(): void {
     this.loadSvg();
+    
+    // Subscribe to selection changes
+    this.selectionService.selectedIcons$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(icons => {
+        this.isSelected = icons.some(selectedIcon => selectedIcon.id === this.icon.id);
+      });
   }
 
   ngOnDestroy(): void {
@@ -40,12 +53,16 @@ export class IconCardComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  onSelect(): void {
+    this.selectionService.toggleIcon(this.icon);
+  }
+
   onDownload(): void {
     this.download.emit(this.icon);
   }
 
   private loadSvg(): void {
-    this.downloadService
+    this.providerRegistry
       .getSvgContent(this.icon)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -53,9 +70,13 @@ export class IconCardComponent implements OnInit, OnDestroy {
           const cleanContent = this.sanitizeSvg(content);
           this.svgContent =
             this.sanitizer.bypassSecurityTrustHtml(cleanContent);
+          this.isLoading = false;
+          // Store the SVG content for download
+          this.icon.svgContent = content;
         },
         error: () => {
           this.setFallbackSvg();
+          this.isLoading = false;
         },
       });
   }
@@ -68,6 +89,7 @@ export class IconCardComponent implements OnInit, OnDestroy {
         <line x1="8" y1="12" x2="16" y2="12"></line>
       </svg>`;
     this.svgContent = this.sanitizer.bypassSecurityTrustHtml(fallbackSvg);
+    this.icon.svgContent = fallbackSvg;
   }
 
   private sanitizeSvg(content: string): string {

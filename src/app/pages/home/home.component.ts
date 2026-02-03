@@ -19,6 +19,7 @@ import { IconApiResponse } from '../../core/models/icon.model';
 import { ProviderRegistryService } from '../../core/services/providers/provider-registry.service';
 import { DownloadService } from '../../core/services/download.service';
 import { EnvironmentService } from '../../core/services/environment.service';
+import { SelectionService } from '../../core/services/selection.service';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentProvider = 'Iconoir';
 
   private offset = 0;
-  private readonly limit = 16;
+  private readonly limit = 30;
   hasMore = true;
   currentMode: 'search' | 'random' = 'random';
   private totalIcons = 0;
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private providerRegistry: ProviderRegistryService,
     private downloadService: DownloadService,
     private environment: EnvironmentService,
+    private selectionService: SelectionService
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (searchQuery.trim()) {
       this.currentMode = 'search';
       this.resetPagination();
+      this.selectionService.clearSelection(); // Clear selection on new search
       this.loadSearchResults(searchQuery);
     }
   }
@@ -88,6 +91,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.currentMode = 'random';
     this.searchControl.setValue('');
     this.resetPagination();
+    this.selectionService.clearSelection(); // Clear selection on random load
     this.loadRandomIcons();
   }
 
@@ -108,6 +112,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       const provider = this.providerRegistry.getActiveProvider();
       this.currentProvider = provider?.displayName || providerName;
       this.resetPagination();
+      this.selectionService.clearSelection(); // Clear selection on provider change
 
       if (this.currentMode === 'search' && this.searchControl.value?.trim()) {
         this.loadSearchResults(this.searchControl.value);
@@ -166,7 +171,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   private handleError(error: any): void {
     console.error('API Error:', error);
     this.hasMore = false;
-    // You could show a toast notification here
   }
 
   getResultCountText(): string {

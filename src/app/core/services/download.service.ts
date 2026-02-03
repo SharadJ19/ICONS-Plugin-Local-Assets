@@ -1,9 +1,6 @@
 // src/app/core/services/download.service.ts
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { Icon } from '../models/icon.model';
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +8,6 @@ export class DownloadService {
   private isBrowser: boolean;
 
   constructor(
-    private http: HttpClient,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -24,31 +20,23 @@ export class DownloadService {
     }
 
     try {
-      const response = await fetch(icon.downloadUrl);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // The SVG content should already be loaded by the icon card component
+      // If not, we'll create a simple download link
+      if (icon.svgContent) {
+        this.downloadSvgContent(icon.svgContent, this.getFileName(icon));
+      } else {
+        // Fallback: create a download link to the asset path
+        this.downloadFromUrl(icon.path, this.getFileName(icon));
       }
-      
-      const svgContent = await response.text();
-      const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-      const blobUrl = URL.createObjectURL(blob);
-      
-      this.triggerDownload(blobUrl, this.getFileName(icon));
-      
-      setTimeout(() => {
-        URL.revokeObjectURL(blobUrl);
-      }, 100);
-      
     } catch (error) {
       console.error('Download failed:', error);
-      this.fallbackDownload(icon);
     }
   }
 
-  private triggerDownload(blobUrl: string, fileName: string): void {
-    if (!this.isBrowser) return;
-
+  private downloadSvgContent(svgContent: string, fileName: string): void {
+    const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+    const blobUrl = URL.createObjectURL(blob);
+    
     const link = document.createElement('a');
     link.href = blobUrl;
     link.download = fileName;
@@ -57,14 +45,16 @@ export class DownloadService {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    
+    setTimeout(() => {
+      URL.revokeObjectURL(blobUrl);
+    }, 100);
   }
 
-  private fallbackDownload(icon: Icon): void {
-    if (!this.isBrowser) return;
-
+  private downloadFromUrl(url: string, fileName: string): void {
     const link = document.createElement('a');
-    link.href = icon.downloadUrl;
-    link.download = this.getFileName(icon);
+    link.href = url;
+    link.download = fileName;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.style.display = 'none';
@@ -84,17 +74,8 @@ export class DownloadService {
     return `${cleanName}_${providerAbbr}.svg`;
   }
 
-  getSvgContent(icon: Icon): Observable<string> {
-    return this.http.get(icon.downloadUrl, { 
-      responseType: 'text',
-      headers: {
-        'Accept': 'image/svg+xml'
-      }
-    }).pipe(
-      catchError(error => {
-        console.error('Failed to fetch SVG content:', error);
-        return throwError(() => new Error('Failed to load SVG content'));
-      })
-    );
+  getSvgContent(icon: Icon): Promise<string> {
+    // This will be handled by the provider service now
+    return Promise.resolve('');
   }
 }

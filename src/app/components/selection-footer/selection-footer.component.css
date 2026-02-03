@@ -1,0 +1,117 @@
+/* src/app/components/selection-footer/selection-footer.component.css */
+.selection-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 2px solid #ff9100;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
+.selection-footer.visible {
+  transform: translateY(0);
+}
+
+.selection-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.count {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.selection-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.clear-btn {
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+.clear-btn:hover {
+  background: #f1f5f9;
+}
+
+.clear-btn mat-icon {
+  font-size: 18px;
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+}
+
+.add-btn {
+  background: #ff9100 !important;
+  color: white !important;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(255, 145, 0, 0.2);
+}
+
+.add-btn:hover {
+  background: #e68200 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 145, 0, 0.3);
+}
+
+.add-btn:active {
+  transform: translateY(0);
+}
+
+.add-btn mat-icon {
+  font-size: 18px;
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+  .selection-footer {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 12px;
+  }
+  
+  .selection-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .clear-btn,
+  .add-btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .count {
+    font-size: 13px;
+  }
+}
+
+/* Better touch targets */
+@media (max-width: 768px) {
+  .clear-btn,
+  .add-btn {
+    min-height: 44px;
+  }
+}

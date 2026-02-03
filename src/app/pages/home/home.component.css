@@ -9,63 +9,39 @@
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 24px 16px 100px;
   min-height: 100vh;
 }
 
 /* =====================================================
-   Header
+   Header - UPDATED: Removed the big heading
    ===================================================== */
 .header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  padding-bottom: 24px;
-  margin-bottom: 32px;
+  gap: 12px;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
   border-bottom: 2px solid #f1f5f9;
 }
 
-.header h1 {
-  font-size: 28px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #1e293b;
-  margin: 0;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.title-icon {
-  color: #ff9100;
-  font-size: 32px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 145, 0, 0.1) 0%, rgba(255, 145, 0, 0.05) 100%);
-  border-radius: 12px;
-}
-
 /* =====================================================
-   Controls - FIXED OVERLAPPING ISSUE
+   Controls
    ===================================================== */
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 32px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 @media (min-width: 768px) {
   .controls {
     flex-direction: row;
     align-items: stretch;
-    gap: 16px;
+    gap: 12px;
   }
 }
 
@@ -73,7 +49,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   min-width: 0;
 }
 
@@ -92,11 +68,11 @@
 
 .search-input {
   width: 100%;
-  height: 52px;
-  padding: 14px 52px 14px 20px;
+  height: 44px;
+  padding: 12px 44px 12px 16px;
   border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 10px;
+  font-size: 14px;
   color: #1e293b;
   background: white;
   transition: all 0.3s ease;
@@ -107,7 +83,7 @@
 .search-input:focus {
   border-color: #ff9100;
   outline: none;
-  box-shadow: 0 0 0 4px rgba(255, 145, 0, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 145, 0, 0.1);
 }
 
 .search-input::placeholder {
@@ -116,27 +92,27 @@
 
 .search-icon {
   position: absolute;
-  right: 20px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   color: #94a3b8;
   pointer-events: none;
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
 }
 
-/* Search Button Styles - Orange Accent with White Text */
+/* Search Button Styles */
 .search-btn {
-  height: 52px;
-  padding: 0 24px;
-  border-radius: 12px;
-  font-size: 15px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   cursor: pointer;
   border: none;
@@ -144,13 +120,13 @@
   white-space: nowrap;
   background: #ff9100 !important;
   color: white !important;
-  box-shadow: 0 2px 8px rgba(255, 145, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(255, 145, 0, 0.2);
 }
 
 .search-btn:hover:not(:disabled) {
   background: #e68200 !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 145, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 145, 0, 0.3);
 }
 
 .search-btn:active:not(:disabled) {
@@ -165,9 +141,9 @@
 }
 
 .search-btn mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,15 +151,15 @@
 
 /* Random Button */
 .random-btn {
-  height: 52px;
-  padding: 0 24px;
-  border-radius: 12px;
-  font-size: 15px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -209,9 +185,9 @@
 }
 
 .random-btn mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -225,13 +201,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  font-size: 14px;
+  gap: 10px;
+  font-size: 13px;
   color: #64748b;
-  margin-bottom: 24px;
-  padding: 16px 20px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
   background: white;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid #f1f5f9;
 }
 
@@ -242,11 +218,11 @@
 
 .provider-info {
   background: rgba(255, 145, 0, 0.1);
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
   color: #ff9100;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
   margin: 0;
   border: 1px solid rgba(255, 145, 0, 0.2);
 }
@@ -257,7 +233,7 @@
 .icons-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 @media (min-width: 480px) {
@@ -275,6 +251,7 @@
 @media (min-width: 768px) {
   .icons-grid {
     grid-template-columns: repeat(5, 1fr);
+    gap:12px;
   }
 }
 
@@ -286,7 +263,14 @@
 
 @media (min-width: 1280px) {
   .icons-grid {
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .icons-grid {
+    grid-template-columns: repeat(10, 1fr);
   }
 }
 
@@ -295,35 +279,35 @@
    ===================================================== */
 .empty-state {
   text-align: center;
-  padding: 80px 24px;
+  padding: 48px 20px;
   color: #64748b;
   background: white;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 2px solid #f1f5f9;
 }
 
 .empty-icon {
-  font-size: 64px;
-  width: 64px;
-  height: 64px;
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
   color: #cbd5e1;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .empty-state h2 {
-  font-size: 24px;
+  font-size: 20px;
   color: #1e293b;
-  margin: 0 0 12px 0;
+  margin: 0 0 10px 0;
   font-weight: 600;
 }
 
 .empty-state p {
-  font-size: 16px;
+  font-size: 14px;
   color: #64748b;
-  margin: 0 0 24px 0;
+  margin: 0 0 20px 0;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
@@ -331,28 +315,28 @@
 }
 
 .try-again-btn {
-  height: 52px;
-  padding: 0 24px;
-  border-radius: 12px;
-  font-size: 15px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   cursor: pointer;
   background: #ff9100 !important;
   color: white !important;
   border: none;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(255, 145, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(255, 145, 0, 0.2);
 }
 
 .try-again-btn:hover {
   background: #e68200 !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 145, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 145, 0, 0.3);
 }
 
 .try-again-btn:active {
@@ -360,16 +344,16 @@
 }
 
 .try-again-btn mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .loading-section {
-  margin: 48px 0;
+  margin: 32px 0;
   display: flex;
   justify-content: center;
 }
@@ -380,19 +364,19 @@
 .footer {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 28px;
 }
 
 .load-more-btn {
-  height: 52px;
-  padding: 0 32px;
-  border-radius: 12px;
-  font-size: 15px;
+  height: 44px;
+  padding: 0 28px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -417,9 +401,9 @@
 }
 
 .load-more-btn mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -430,18 +414,13 @@
    ===================================================== */
 @media (max-width: 767px) {
   .container {
-    padding: 24px 16px;
+    padding: 16px 12px 120px;
   }
 
   .header {
     flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .header h1 {
-    font-size: 24px;
-    justify-content: center;
+    align-items: stretch;
+    gap: 16px;
   }
 
   .search-box {
@@ -461,34 +440,67 @@
   .results-info {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
   }
 
   .icons-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 8px;
   }
 
   .search-input,
   .search-btn,
   .random-btn,
   .load-more-btn {
-    height: 48px;
+    height: 42px;
   }
 }
 
 @media (max-width: 480px) {
   .icons-grid {
     grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .empty-state {
+    padding: 32px 16px;
+  }
+  
+  .empty-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .empty-state h2 {
+    font-size: 18px;
+  }
+  
+  .empty-state p {
+    font-size: 13px;
   }
 }
 
-
-/* Add this ONE fix to home.component.css at the end */
 .icons-grid {
   grid-auto-flow: dense;
 }
 
 .icons-grid app-icon-card {
   width: 100%;
+}
+
+/* Better touch targets */
+@media (max-width: 768px) {
+  button,
+  .icon-card,
+  .dropdown-item {
+    min-height: 44px;
+  }
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid #ff9100;
+  outline-offset: 2px;
+  border-radius: 4px;
 }

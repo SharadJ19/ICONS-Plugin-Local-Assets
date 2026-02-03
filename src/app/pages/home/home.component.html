@@ -1,12 +1,11 @@
 <!-- src/app/pages/home/home.component.html -->
 <div class="container">
-  <!-- Header -->
+  <!-- Header - Updated: No big heading -->
   <header class="header">
-    <h1>
-      <mat-icon class="title-icon">apps</mat-icon>
-      Icons Aggregator
-    </h1>
-
+    <!-- Left side: Mode selector -->
+    <app-mode-selector></app-mode-selector>
+    
+    <!-- Right side: Provider selector -->
     <app-provider-selector
       (providerChange)="onProviderChange($event)"
     ></app-provider-selector>
@@ -113,3 +112,6 @@
     </button>
   </div>
 </div>
+
+<!-- Selection Footer -->
+<app-selection-footer></app-selection-footer>

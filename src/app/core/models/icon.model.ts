@@ -3,11 +3,9 @@ export interface Icon {
   id: string;
   name: string;
   displayName: string;
-  url: string;
-  downloadUrl: string;
   provider: string;
-  size: number;
-  path: string;
+  category?: string; // Optional category for organization
+  path: string; // Relative path in assets
   svgContent?: string;
 }
 

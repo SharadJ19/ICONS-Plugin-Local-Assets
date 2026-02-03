@@ -16,20 +16,9 @@ export class ApiInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const isGitHubApi = request.url.includes('api.github.com');
-
-    let clonedRequest = request;
-
-    if (isGitHubApi) {
-      clonedRequest = request.clone({
-        setHeaders: {
-          Accept: 'application/vnd.github.v3+json',
-        },
-      });
-    }
-
-    return next.handle(clonedRequest).pipe(
-      retry(2),
+    // Simplified interceptor since we're only loading local assets
+    return next.handle(request).pipe(
+      retry(1), // Only retry once for local assets
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'An error occurred';
 
@@ -37,13 +26,8 @@ export class ApiInterceptor implements HttpInterceptor {
           errorMessage = error.error.message;
         } else if (error.status === 0) {
           errorMessage = 'Network error. Please check your connection.';
-        } else if (error.status === 401) {
-          errorMessage =
-            'Authentication failed. Please check your GitHub token.';
-        } else if (error.status === 403) {
-          errorMessage = 'API rate limit exceeded. Please try again later.';
         } else if (error.status === 404) {
-          errorMessage = 'Resource not found.';
+          errorMessage = 'Resource not found. The requested icon may not exist.';
         } else {
           errorMessage = `Error ${error.status}: ${error.message}`;
         }

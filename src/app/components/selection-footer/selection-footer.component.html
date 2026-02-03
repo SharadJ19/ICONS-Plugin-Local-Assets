@@ -1,0 +1,17 @@
+<div class="selection-footer" [class.visible]="isVisible">
+  <div class="selection-info">
+    <span class="count">{{ selectedCount }} icon(s) selected</span>
+  </div>
+  
+  <div class="selection-actions">
+    <button mat-button class="clear-btn" (click)="onClearSelection()">
+      <mat-icon>close</mat-icon>
+      Clear
+    </button>
+    
+    <button mat-raised-button class="add-btn" (click)="onAddToProject()">
+      <mat-icon>add</mat-icon>
+      Add to Project
+    </button>
+  </div>
+</div>

@@ -11,14 +11,8 @@ export class EnvironmentService {
   }
 
   get githubToken(): string {
-    // In production, use environment token
-    if (this.config.production) {
-      return this.config.githubToken || '';
-    }
-    
-    // In development, check localStorage first, then environment
-    const storedToken = localStorage.getItem('github_token');
-    return storedToken || this.config.githubToken || '';
+    // Return empty string since we no longer need GitHub tokens
+    return '';
   }
 
   get apiConfig() {
@@ -39,14 +33,12 @@ export class EnvironmentService {
   }
 
   setToken(token: string): void {
-    if (!this.production) {
-      localStorage.setItem('github_token', token);
-    }
+    // No longer needed, but keep for compatibility
+    console.warn('GitHub token no longer needed for local assets');
   }
 
   clearToken(): void {
-    if (!this.production) {
-      localStorage.removeItem('github_token');
-    }
+    // No longer needed, but keep for compatibility
+    console.warn('GitHub token no longer needed for local assets');
   }
 }

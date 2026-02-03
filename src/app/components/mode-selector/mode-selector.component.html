@@ -1,0 +1,10 @@
+<div class="mode-selector">
+  <button mat-button (click)="toggleMode()" class="mode-btn" [class.active]="currentMode === 'multi'">
+    <mat-icon class="mode-icon">
+      {{ currentMode === 'single' ? 'radio_button_unchecked' : 'checklist' }}
+    </mat-icon>
+    <span class="mode-label">
+      {{ currentMode === 'single' ? 'Single Select' : 'Multi Select' }}
+    </span>
+  </button>
+</div>

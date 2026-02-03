@@ -3,7 +3,7 @@ export const environment = {
   production: true,
   githubToken: '', // Will be injected via CI/CD environment variables
   apiConfig: {
-    defaultLimit: 16,
+    defaultLimit: 30,
     maxLimit: 100,
     timeout: 30000,
     retryAttempts: 3,
