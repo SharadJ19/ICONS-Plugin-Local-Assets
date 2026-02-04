@@ -458,28 +458,29 @@
 
 @media (max-width: 480px) {
   .icons-grid {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
-  
+
   .empty-state {
     padding: 32px 16px;
   }
-  
+
   .empty-icon {
     font-size: 40px;
     width: 40px;
     height: 40px;
   }
-  
+
   .empty-state h2 {
     font-size: 18px;
   }
-  
+
   .empty-state p {
     font-size: 13px;
   }
 }
+
 
 .icons-grid {
   grid-auto-flow: dense;
