@@ -2,10 +2,9 @@
 import { Injectable, Injector, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, forkJoin, of, BehaviorSubject } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { IconApiResponse } from '../../models/icon.model';
-import { IconProvider } from './icon-provider.interface';
-import { LocalAssetProviderService, PROVIDER_CONFIG } from './local-asset.provider.service';
+import { LocalAssetProviderService } from './local-asset.provider.service';
 import { HttpClient } from '@angular/common/http';
 
 interface ProviderInfo {
@@ -35,19 +34,22 @@ export class ProviderRegistryService {
   private initializeProviders(): void {
     // Define all providers
     const providersConfig = [
-    { name: 'BOOTSTRAP', displayName: 'Bootstrap', path: 'bootstrap' },
-    { name: 'FEATHER', displayName: 'Feather', path: 'feather' },
-    { name: 'GILBARBARA', displayName: 'Gilbarbara', path: 'gilbarbara' },
-    { name: 'HEROICONS', displayName: 'Heroicons', path: 'heroicons-24-solid' },
-    { name: 'ICONOIR', displayName: 'Iconoir', path: 'iconoir' }, // Changed
-    { name: 'SIMPLE_ICONS', displayName: 'Simple Icons', path: 'simple-icons' },
-    { name: 'BRAND_LOGOS', displayName: 'Brand Logos', path: 'simple-svg-brand-logos' }, // Changed
-    { name: 'TABLER', displayName: 'Tabler', path: 'tabler' } // Changed
-  ];
+      { name: 'BOOTSTRAP', displayName: 'Bootstrap', path: 'bootstrap' },
+      { name: 'FEATHER', displayName: 'Feather', path: 'feather' },
+      { name: 'GILBARBARA', displayName: 'Gilbarbara', path: 'gilbarbara' },
+      { name: 'HEROICONS', displayName: 'Heroicons', path: 'heroicons-24-solid' },
+      { name: 'ICONOIR', displayName: 'Iconoir', path: 'iconoir' },
+      { name: 'SIMPLE_ICONS', displayName: 'Simple Icons', path: 'simple-icons' },
+      { name: 'BRAND_LOGOS', displayName: 'Brand Logos', path: 'simple-svg-brand-logos' },
+      { name: 'TABLER', displayName: 'Tabler', path: 'tabler' }
+    ];
 
     // Create instances for each provider
     providersConfig.forEach(config => {
-      const provider = this.createProviderInstance(config);
+      const provider = new LocalAssetProviderService(
+        this.http,
+        { name: config.name, displayName: config.displayName, path: config.path }
+      );
       this.providers.set(config.name, {
         name: config.name,
         displayName: config.displayName,
@@ -67,14 +69,6 @@ export class ProviderRegistryService {
         console.error('Failed to initialize providers:', error);
       }
     });
-  }
-
-  private createProviderInstance(config: { name: string; displayName: string; path: string }): LocalAssetProviderService {
-    // Create a factory for the provider with its config
-    return new LocalAssetProviderService(
-      this.http,
-      { name: config.name, displayName: config.displayName, path: config.path }
-    );
   }
 
   private initializeAllProviders(): Observable<void[]> {
@@ -146,7 +140,6 @@ export class ProviderRegistryService {
     const stats: Array<{ name: string; displayName: string; count: number }> = [];
     
     this.providers.forEach(providerInfo => {
-      // Access the internal icons array (you might need to expose this)
       const iconCount = (providerInfo.service as any).icons?.length || 0;
       stats.push({
         name: providerInfo.name,
