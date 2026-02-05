@@ -1,6 +1,5 @@
 // src/app/app.component.ts
-import { Component, OnInit } from '@angular/core';
-import { ProviderRegistryService } from './core/services/providers/provider-registry.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +10,9 @@ import { ProviderRegistryService } from './core/services/providers/provider-regi
   `,
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'Icons Plugin Standalone';
-  isPluginMode = false;
-
-  constructor(
-    private providerRegistry: ProviderRegistryService
-  ) {}
-
-  ngOnInit(): void {
-    // Providers are now auto-initialized in ProviderRegistryService
-    this.isPluginMode = window.location.search.includes('plugin=true');
-  }
+export class AppComponent {
+  title = 'Iconografix';
+  
+  // Note: Providers are now auto-initialized in ProviderRegistryService
+  // The isPluginMode check is kept for compatibility
 }

@@ -21,7 +21,6 @@ export class DownloadService {
 
     try {
       // The SVG content should already be loaded by the icon card component
-      // If not, we'll create a simple download link
       if (icon.svgContent) {
         this.downloadSvgContent(icon.svgContent, this.getFileName(icon));
       } else {
@@ -72,10 +71,5 @@ export class DownloadService {
     
     const providerAbbr = icon.provider.toLowerCase().substring(0, 3);
     return `${cleanName}_${providerAbbr}.svg`;
-  }
-
-  getSvgContent(icon: Icon): Promise<string> {
-    // This will be handled by the provider service now
-    return Promise.resolve('');
   }
 }

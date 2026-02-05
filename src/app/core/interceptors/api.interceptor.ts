@@ -8,7 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
@@ -16,9 +16,7 @@ export class ApiInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    // Simplified interceptor since we're only loading local assets
     return next.handle(request).pipe(
-      retry(1), // Only retry once for local assets
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'An error occurred';
 
