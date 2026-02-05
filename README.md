@@ -47,8 +47,8 @@ src/
 For a detailed breakdown of system design, architectural decisions, design patterns, and scalability considerations, see:
 
 #### 📘 Additional Docs:
-1. **[Architecture Docs](ARCHITECTURE.md)**
-2. **[Module Federation Docs](MODULE-FEDERATION.md)**
+1. **[Architecture Docs](docs/ARCHITECTURE.md)**
+2. **[Module Federation Docs](docs/MODULE-FEDERATION.md)**
 
 ## 🔌 Provider System (Extensible Design)
 
