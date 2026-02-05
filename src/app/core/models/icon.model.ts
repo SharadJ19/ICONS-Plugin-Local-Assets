@@ -4,8 +4,8 @@ export interface Icon {
   name: string;
   displayName: string;
   provider: string;
-  category?: string; // Optional category for organization
-  path: string; // Relative path in assets
+  category?: string;
+  path: string;
   svgContent?: string;
 }
 
