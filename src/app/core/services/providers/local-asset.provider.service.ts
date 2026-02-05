@@ -49,7 +49,7 @@ initialize(): Observable<boolean> {
       
       this.icons = files.map((fileName: string) => this.createIcon(fileName));
       this.initialized = true;
-      console.log(`${this.displayName}: Loaded ${this.icons.length} icons from manifest`);
+      //  console.log(`${this.displayName}: Loaded ${this.icons.length} icons from manifest`);
       return true;
     }),
     catchError(error => {
@@ -59,7 +59,7 @@ initialize(): Observable<boolean> {
         map(files => {
           this.icons = files.map(fileName => this.createIcon(fileName));
           this.initialized = true;
-          console.log(`${this.displayName}: Scanned ${this.icons.length} icons`);
+          // console.log(`${this.displayName}: Scanned ${this.icons.length} icons`);
           return true;
         }),
         catchError(scanError => {

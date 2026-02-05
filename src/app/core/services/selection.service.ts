@@ -4,59 +4,57 @@ import { Icon } from '../models/icon.model';
 
 @Injectable({ providedIn: 'root' })
 export class SelectionService {
-  private selectedIcons = new Set<string>();
-  private selectedIconsSubject = new BehaviorSubject<Icon[]>([]);
+  private selectedIcons = new BehaviorSubject<Icon[]>([]);
   private selectionModeSubject = new BehaviorSubject<'single' | 'multi'>('single');
   
-  selectedIcons$ = this.selectedIconsSubject.asObservable();
+  selectedIcons$ = this.selectedIcons.asObservable();
   selectionMode$ = this.selectionModeSubject.asObservable();
   
   toggleIcon(icon: Icon): void {
+    const currentIcons = this.selectedIcons.value;
+    
     if (this.selectionModeSubject.value === 'single') {
-      this.selectedIcons.clear();
-      this.selectedIcons.add(icon.id);
+      // For single mode, replace with the new icon
+      this.selectedIcons.next([icon]);
     } else {
-      if (this.selectedIcons.has(icon.id)) {
-        this.selectedIcons.delete(icon.id);
+      // For multi mode, toggle the icon
+      const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
+      if (existingIndex > -1) {
+        // Remove if already selected
+        const newIcons = [...currentIcons];
+        newIcons.splice(existingIndex, 1);
+        this.selectedIcons.next(newIcons);
       } else {
-        this.selectedIcons.add(icon.id);
+        // Add if not selected
+        this.selectedIcons.next([...currentIcons, icon]);
       }
     }
-    this.emitSelectedIcons();
   }
   
   isSelected(icon: Icon): boolean {
-    return this.selectedIcons.has(icon.id);
+    return this.selectedIcons.value.some(selectedIcon => selectedIcon.id === icon.id);
   }
   
   getSelectedCount(): number {
-    return this.selectedIcons.size;
+    return this.selectedIcons.value.length;
   }
   
   getSelectedIcons(): Icon[] {
-    return Array.from(this.selectedIcons).map(id => ({ id } as Icon));
+    return this.selectedIcons.value;
   }
   
   clearSelection(): void {
-    this.selectedIcons.clear();
-    this.emitSelectedIcons();
+    this.selectedIcons.next([]);
   }
   
   setSelectionMode(mode: 'single' | 'multi'): void {
     this.selectionModeSubject.next(mode);
     if (mode === 'single') {
       // If switching to single mode, keep only the first selected icon
-      const firstId = Array.from(this.selectedIcons)[0];
-      this.selectedIcons.clear();
-      if (firstId) {
-        this.selectedIcons.add(firstId);
+      const currentIcons = this.selectedIcons.value;
+      if (currentIcons.length > 1) {
+        this.selectedIcons.next([currentIcons[0]]);
       }
-      this.emitSelectedIcons();
     }
-  }
-  
-  private emitSelectedIcons(): void {
-    const icons = Array.from(this.selectedIcons).map(id => ({ id } as Icon));
-    this.selectedIconsSubject.next(icons);
   }
 }
