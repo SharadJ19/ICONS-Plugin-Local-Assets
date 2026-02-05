@@ -1,4 +1,5 @@
-// src/main.ts
+// src\main.ts
+
 import { initFederation } from '@angular-architects/module-federation';
 
 initFederation('/assets/mf.manifest.json')

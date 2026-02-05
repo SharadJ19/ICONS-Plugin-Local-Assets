@@ -1,4 +1,5 @@
-// src/app/components/selection-footer/selection-footer.component.ts
+// src\app\components\selection-footer\selection-footer.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { SelectionService } from '../../core/services/selection.service';
 import { Icon } from '../../core/models/icon.model';

@@ -1,4 +1,5 @@
-// src/app/core/services/providers/local-asset.provider.service.ts
+// src\app\core\services\providers\local-asset.provider.service.ts
+
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';

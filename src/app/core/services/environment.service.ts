@@ -1,4 +1,5 @@
-// src/app/core/services/environment.service.ts
+// src\app\core\services\environment.service.ts
+
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 

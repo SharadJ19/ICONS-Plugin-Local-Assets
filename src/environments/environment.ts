@@ -1,4 +1,5 @@
-// src/environments/environment.ts
+// src\environments\environment.ts
+
 export const environment = {
   production: false,
   apiConfig: {

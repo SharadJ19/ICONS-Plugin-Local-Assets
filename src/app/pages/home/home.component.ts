@@ -1,4 +1,5 @@
-// src/app/pages/home/home.component.ts
+// src\app\pages\home\home.component.ts
+
 import {
   Component,
   OnInit,

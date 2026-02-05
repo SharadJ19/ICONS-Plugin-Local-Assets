@@ -1,4 +1,5 @@
-// src/app/components/mode-selector/mode-selector.component.ts
+// src\app\components\mode-selector\mode-selector.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { SelectionService } from '../../core/services/selection.service';
 import { MatButtonModule } from '@angular/material/button';

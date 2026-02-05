@@ -1,5 +1,4 @@
-// src/app/core/types/provider.types.ts
-
+// src\app\core\types\provider.type.ts
 export interface ProviderManifest {
   provider: string;
   displayName: string;

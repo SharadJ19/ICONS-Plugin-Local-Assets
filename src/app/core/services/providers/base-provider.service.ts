@@ -1,4 +1,5 @@
-// src/app/core/services/providers/base-provider.service.ts
+// src\app\core\services\providers\base-provider.service.ts
+
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IconApiResponse } from '../../models/icon.model';

@@ -1,4 +1,4 @@
-// src/app/core/models/icon.model.ts
+// src\app\core\models\icon.model.ts
 export interface Icon {
   id: string;
   name: string;

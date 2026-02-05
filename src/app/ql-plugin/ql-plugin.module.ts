@@ -1,4 +1,5 @@
-// src/app/ql-plugin/ql-plugin.module.ts
+// src\app\ql-plugin\ql-plugin.module.ts
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QlPluginRoutingModule } from './ql-plugin-routing.module';

@@ -1,4 +1,5 @@
-/* src/app/components/loading-spinner/loading-spinner.component.css */
+/* src\app\components\loading-spinner\loading-spinner.component.css */
+
 :host {
   display: block;
 }

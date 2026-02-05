@@ -1,3 +1,5 @@
+// src\app\core\services\selection.service.ts
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Icon } from '../models/icon.model';

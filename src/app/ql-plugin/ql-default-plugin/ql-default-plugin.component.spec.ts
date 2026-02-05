@@ -1,3 +1,5 @@
+// src\app\ql-plugin\ql-default-plugin\ql-default-plugin.component.spec.ts
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QlDefaultPluginComponent } from './ql-default-plugin.component';

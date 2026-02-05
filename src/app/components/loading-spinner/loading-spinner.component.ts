@@ -1,4 +1,5 @@
-// src/app/components/loading-spinner/loading-spinner.component.ts
+// src\app\components\loading-spinner\loading-spinner.component.ts
+
 import { Component, Input } from '@angular/core';
 
 @Component({

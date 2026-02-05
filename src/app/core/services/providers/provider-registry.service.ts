@@ -1,4 +1,5 @@
-// src/app/core/services/providers/provider-registry.service.ts
+// src\app\core\services\providers\provider-registry.service.ts
+
 import { Injectable, Injector, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, forkJoin, of, BehaviorSubject } from 'rxjs';
