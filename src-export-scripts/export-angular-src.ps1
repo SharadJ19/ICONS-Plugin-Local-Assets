@@ -18,9 +18,7 @@ $outputFile = "angular-src-export.txt"
 $extensions = @(
     "*.ts",
     "*.html",
-    "*.scss",
-    "*.css",
-    "*.json"
+    "*.css"
 )
 
 # ================================
