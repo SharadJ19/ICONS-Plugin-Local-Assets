@@ -11,8 +11,7 @@ export class EnvironmentService {
   }
 
   get githubToken(): string {
-    // Return empty string since we no longer need GitHub tokens
-    return '';
+    return ''; // GitHub token no longer needed
   }
 
   get apiConfig() {
@@ -30,15 +29,5 @@ export class EnvironmentService {
   getProviderConfig(providerName: string): any {
     const providers = this.config.providers as any;
     return providers[providerName.toLowerCase()] || null;
-  }
-
-  setToken(token: string): void {
-    // No longer needed, but keep for compatibility
-    console.warn('GitHub token no longer needed for local assets');
-  }
-
-  clearToken(): void {
-    // No longer needed, but keep for compatibility
-    console.warn('GitHub token no longer needed for local assets');
   }
 }
