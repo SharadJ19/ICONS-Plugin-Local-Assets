@@ -1,23 +1,42 @@
 // src/environments/environment.prod.ts
 export const environment = {
   production: true,
-  githubToken: '', // Will be injected via CI/CD environment variables
   apiConfig: {
     defaultLimit: 30,
     maxLimit: 100,
-    timeout: 30000,
-    retryAttempts: 3,
   },
   providers: {
     iconoir: {
-      baseUrl: 'https://api.github.com/repos/SharadJ19/free-svg-icons/contents/iconoir-regular-icons',
-      displayName: 'Iconoir',
-      iconPath: 'iconoir-regular-icons'
+      path: 'iconoir',
+      displayName: 'Iconoir'
     },
     bootstrap: {
-      baseUrl: 'https://api.github.com/repos/SharadJ19/free-svg-icons/contents/bootstrap-icons',
-      displayName: 'Bootstrap',
-      iconPath: 'bootstrap-icons'
+      path: 'bootstrap',
+      displayName: 'Bootstrap'
+    },
+    feather: {
+      path: 'feather',
+      displayName: 'Feather'
+    },
+    gilbarbara: {
+      path: 'gilbarbara',
+      displayName: 'Gilbarbara'
+    },
+    heroicons: {
+      path: 'heroicons-24-solid',
+      displayName: 'Heroicons'
+    },
+    simpleIcons: {
+      path: 'simple-icons',
+      displayName: 'Simple Icons'
+    },
+    brandLogos: {
+      path: 'simple-svg-brand-logos',
+      displayName: 'Brand Logos'
+    },
+    tabler: {
+      path: 'tabler',
+      displayName: 'Tabler'
     }
   },
   uiConfig: {
