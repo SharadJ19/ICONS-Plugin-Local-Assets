@@ -104,7 +104,7 @@ export class SelectionFooterComponent implements OnInit {
           type: 'ADD_OBJECT',
           payload: {
             dataString: base64Data,
-            type: 'imagebox',
+            type: 'stickerbox',
             metaData: metaData,
           },
         });
@@ -114,7 +114,7 @@ export class SelectionFooterComponent implements OnInit {
             type: 'ADD_OBJECT',
             payload: {
               dataString: base64Data,
-              type: 'imagebox',
+              type: 'stickerbox',
               metaData: metaData,
             },
           },
