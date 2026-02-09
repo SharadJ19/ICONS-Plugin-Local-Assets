@@ -1,5 +1,7 @@
 # Icons Aggregator 🎨⚡
 
+<img src="src/Iconografix.png" alt="Iconografix Logo" width="500" height="300">
+
 A beautiful Angular application that aggregates SVG icons from multiple providers (Iconoir & Bootstrap) into a single, unified interface.  
 Search, browse, and download high-quality icons with a clean, modern UI and extensible architecture.
 
