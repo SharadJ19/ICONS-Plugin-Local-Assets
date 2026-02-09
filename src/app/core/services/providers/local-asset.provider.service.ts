@@ -7,14 +7,12 @@ import { BaseProviderService } from './base-provider.service';
 import { IconApiResponse, Icon } from '../../models/icon.model';
 import { HttpClient } from '@angular/common/http';
 
-// Configuration interface
 export interface ProviderConfig {
   name: string;
   displayName: string;
   path: string;
 }
 
-// Remove @Injectable() decorator - we'll create instances manually
 export class LocalAssetProviderService extends BaseProviderService {
   readonly name: string;
   readonly displayName: string;
@@ -26,7 +24,7 @@ export class LocalAssetProviderService extends BaseProviderService {
 
   constructor(
     private http: HttpClient,
-    config: ProviderConfig  // Regular parameter, not injected
+    config: ProviderConfig 
   ) {
     super();
     this.name = config.name;

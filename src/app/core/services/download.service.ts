@@ -21,11 +21,9 @@ export class DownloadService {
     }
 
     try {
-      // The SVG content should already be loaded by the icon card component
       if (icon.svgContent) {
         this.downloadSvgContent(icon.svgContent, this.getFileName(icon));
       } else {
-        // Fallback: create a download link to the asset path
         this.downloadFromUrl(icon.path, this.getFileName(icon));
       }
     } catch (error) {

@@ -13,7 +13,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Iconografix';
-  
-  // Note: Providers are now auto-initialized in ProviderRegistryService
-  // The isPluginMode check is kept for compatibility
 }

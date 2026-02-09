@@ -1,9 +1,9 @@
 <!-- src\app\pages\home\home.component.html -->
 
 <div class="container">
-  <!-- Header - Updated: No big heading -->
+  <!-- Header -->
   <header class="header">
-    <!-- Right side: Provider selector only -->
+    <!-- Right side -->
     <app-provider-selector
       (providerChange)="onProviderChange($event)"
     ></app-provider-selector>
@@ -53,10 +53,10 @@
     <p class="result-count">{{ getResultCountText() }}</p>
     <p class="provider-info">Provider: {{ currentProvider }}</p>
 
-    <!-- Replace the selection-hint paragraph with a simpler version -->
-  <p class="selection-hint" *ngIf="selectionService.getSelectedCount() > 0">
-    {{ selectionService.getSelectedCount() }} selected
-  </p>
+    <!-- selection-hint -->
+    <p class="selection-hint" *ngIf="selectionService.getSelectedCount() > 0">
+      {{ selectionService.getSelectedCount() }} selected
+    </p>
   </div>
 
   <!-- Icons Grid -->
@@ -78,11 +78,7 @@
     <p *ngIf="!searchControl.value?.trim()">
       Click "Random" to load icons from {{ currentProvider }}
     </p>
-    <button
-      mat-button
-      (click)="onRandom()"
-      class="try-again-btn"
-    >
+    <button mat-button (click)="onRandom()" class="try-again-btn">
       <mat-icon>refresh</mat-icon>
       Load Random Icons
     </button>

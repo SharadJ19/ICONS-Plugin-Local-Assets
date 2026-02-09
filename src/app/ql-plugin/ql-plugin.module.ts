@@ -35,7 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    SelectionFooterComponent, // Only SelectionFooterComponent remains
+    SelectionFooterComponent,
   ],
   exports: [
     QlDefaultPluginComponent,

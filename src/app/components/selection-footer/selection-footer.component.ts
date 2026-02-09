@@ -33,7 +33,6 @@ export class SelectionFooterComponent implements OnInit {
     });
   }
 
-    // Update the getSelectionHint method to be minimal
   getSelectionHint(): string {
     if (this.selectedCount === 1) {
       return 'Click to select multiple, double-click for single';
@@ -53,19 +52,14 @@ export class SelectionFooterComponent implements OnInit {
 
   private async processSingleIcon(icon: Icon): Promise<void> {
     try {
-      // Get SVG content
       const svgContent = await this.getSvgContent(icon);
 
-      // Convert to base64
       const base64Data = this.convertSvgToBase64(svgContent);
 
-      // Log base64 data to console
       console.log(`Processing single icon: ${icon.displayName}`, base64Data);
 
-      // Send to parent
       await this.sendToParent(base64Data, icon);
 
-      // Clear selection
       this.selectionService.clearSelection();
     } catch (error: unknown) {
       const message =
@@ -99,10 +93,8 @@ export class SelectionFooterComponent implements OnInit {
         return;
       }
       
-      // For now, just process the first one until batch support is added
       await this.sendToParent(results[0].base64Data, results[0].icon);
       
-      // Clear selection
       this.selectionService.clearSelection();
       
       alert(`${results.length} icons processed. Currently adding first icon only.`);

@@ -12,7 +12,7 @@ export class EnvironmentService {
   }
 
   get githubToken(): string {
-    return ''; // GitHub token no longer needed
+    return '';
   }
 
   get apiConfig() {

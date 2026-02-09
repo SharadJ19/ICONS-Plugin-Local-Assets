@@ -6,7 +6,7 @@
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
-/* Custom scrollbar - Component-scoped */
+/* Custom scrollbar*/
 :host ::ng-deep ::-webkit-scrollbar {
   width: 10px;
 }

@@ -22,7 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'; // Add this import
     RouterModule,
     AppRoutingModule,
     QlPluginModule,
-    MatTooltipModule, // Add this line
+    MatTooltipModule,
   ],
   providers: [
     {

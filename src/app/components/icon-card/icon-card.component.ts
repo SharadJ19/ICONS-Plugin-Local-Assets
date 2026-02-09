@@ -43,8 +43,6 @@ export class IconCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadSvg();
-    
-    // Subscribe to selection changes
     this.selectionService.selectedIcons$
       .pipe(takeUntil(this.destroy$))
       .subscribe(icons => {
@@ -60,21 +58,17 @@ export class IconCardComponent implements OnInit, OnDestroy {
   onCardClick(event: MouseEvent): void {
     const currentTime = Date.now();
     
-    // If clicking on the checkbox, always toggle selection
     if ((event.target as HTMLElement).closest('.selection-checkbox')) {
       event.stopPropagation();
       this.toggleSelection();
       return;
     }
-    
-    // Check if this is a double click
+
     if (currentTime - this.lastClickTime < this.DOUBLE_CLICK_THRESHOLD) {
-      // Double click - select single and clear others
       this.selectionService.clearSelection();
       this.selectionService.addIcon(this.icon);
-      this.lastClickTime = 0; // Reset to prevent triple-click issues
+      this.lastClickTime = 0;
     } else {
-      // Single click - just add this icon to selection (multi-select)
       this.toggleSelection();
       this.lastClickTime = currentTime;
     }
@@ -102,7 +96,6 @@ export class IconCardComponent implements OnInit, OnDestroy {
           this.svgContent =
             this.sanitizer.bypassSecurityTrustHtml(cleanContent);
           this.isLoading = false;
-          // Store the SVG content for download
           this.icon.svgContent = content;
         },
         error: () => {
@@ -124,7 +117,6 @@ export class IconCardComponent implements OnInit, OnDestroy {
   }
 
   private sanitizeSvg(content: string): string {
-    // Only remove dangerous content, don't modify SVG attributes
     return content
       .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       .replace(/on\w+="[^"]*"/g, '')
@@ -132,10 +124,7 @@ export class IconCardComponent implements OnInit, OnDestroy {
       .replace(/xlink:href="javascript:/gi, 'xlink:href="#');
   }
 
-  // Add this method to the IconCardComponent class
-
-  // Change the getTooltipText method to show only the icon name
   getTooltipText(): string {
-    return this.icon.displayName; // Only show the icon name, no extra instructions
+    return this.icon.displayName;
   }
 }

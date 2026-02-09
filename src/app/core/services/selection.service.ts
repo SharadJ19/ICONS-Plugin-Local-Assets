@@ -15,12 +15,10 @@ export class SelectionService {
     const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
     
     if (existingIndex > -1) {
-      // Remove if already selected
       const newIcons = [...currentIcons];
       newIcons.splice(existingIndex, 1);
       this.selectedIcons.next(newIcons);
     } else {
-      // Add if not selected
       this.selectedIcons.next([...currentIcons, icon]);
     }
   }

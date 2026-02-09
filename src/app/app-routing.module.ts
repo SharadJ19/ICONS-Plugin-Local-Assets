@@ -8,13 +8,13 @@ import { QlDefaultPluginComponent } from './ql-plugin/ql-default-plugin/ql-defau
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'plugin', component: QlDefaultPluginComponent },
-  { path: '**', redirectTo: '' } // Wildcard route for 404
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { 
     scrollPositionRestoration: 'enabled',
-    enableTracing: false // Set to true for debugging routes
+    enableTracing: false
   })],
   exports: [RouterModule],
 })
