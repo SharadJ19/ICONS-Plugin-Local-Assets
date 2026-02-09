@@ -7,6 +7,7 @@ import {
   EventEmitter,
   OnInit,
   OnDestroy,
+  HostListener,
 } from '@angular/core';
 import { Icon } from '../../core/models/icon.model';
 import { DownloadService } from '../../core/services/download.service';
@@ -28,6 +29,8 @@ export class IconCardComponent implements OnInit, OnDestroy {
   svgContent: SafeHtml = '';
   isLoading = true;
   isSelected = false;
+  private lastClickTime = 0;
+  private readonly DOUBLE_CLICK_THRESHOLD = 300; // ms
 
   private destroy$ = new Subject<void>();
 
@@ -54,8 +57,35 @@ export class IconCardComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  onSelect(): void {
-    this.selectionService.toggleIcon(this.icon);
+  onCardClick(event: MouseEvent): void {
+    const currentTime = Date.now();
+    
+    // If clicking on the checkbox, always toggle selection
+    if ((event.target as HTMLElement).closest('.selection-checkbox')) {
+      event.stopPropagation();
+      this.toggleSelection();
+      return;
+    }
+    
+    // Check if this is a double click
+    if (currentTime - this.lastClickTime < this.DOUBLE_CLICK_THRESHOLD) {
+      // Double click - select single and clear others
+      this.selectionService.clearSelection();
+      this.selectionService.addIcon(this.icon);
+      this.lastClickTime = 0; // Reset to prevent triple-click issues
+    } else {
+      // Single click - just add this icon to selection (multi-select)
+      this.toggleSelection();
+      this.lastClickTime = currentTime;
+    }
+  }
+
+  toggleSelection(): void {
+    if (this.isSelected) {
+      this.selectionService.removeIcon(this.icon);
+    } else {
+      this.selectionService.addIcon(this.icon);
+    }
   }
 
   onDownload(): void {
@@ -100,5 +130,15 @@ export class IconCardComponent implements OnInit, OnDestroy {
       .replace(/on\w+="[^"]*"/g, '')
       .replace(/href="javascript:/gi, 'href="#')
       .replace(/xlink:href="javascript:/gi, 'xlink:href="#');
+  }
+
+  // Add this method to the IconCardComponent class
+
+  getTooltipText(): string {
+    const baseText = this.icon.displayName;
+    if (this.isSelected) {
+      return `${baseText} (Selected) - Double-click to select only this icon`;
+    }
+    return `${baseText} - Click to select, double-click to select only this`;
   }
 }

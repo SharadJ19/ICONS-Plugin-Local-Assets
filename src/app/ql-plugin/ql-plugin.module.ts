@@ -8,13 +8,12 @@ import { HomeComponent } from '../pages/home/home.component';
 import { IconCardComponent } from '../components/icon-card/icon-card.component';
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 import { ProviderSelectorComponent } from '../components/provider-selector/provider-selector.component';
-import { ModeSelectorComponent } from '../components/mode-selector/mode-selector.component';
 import { SelectionFooterComponent } from '../components/selection-footer/selection-footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatTooltipModule } from '@angular/material/tooltip'; // Add this import
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -33,11 +32,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
-    MatTooltipModule, // Add this line
+    MatTooltipModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    ModeSelectorComponent,
-    SelectionFooterComponent,
+    SelectionFooterComponent, // Only SelectionFooterComponent remains
   ],
   exports: [
     QlDefaultPluginComponent,
@@ -45,7 +43,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     IconCardComponent,
     ProviderSelectorComponent,
     LoadingSpinnerComponent,
-    ModeSelectorComponent,
     SelectionFooterComponent,
   ],
 })

@@ -3,10 +3,7 @@
 <div class="container">
   <!-- Header - Updated: No big heading -->
   <header class="header">
-    <!-- Left side: Mode selector -->
-    <app-mode-selector></app-mode-selector>
-    
-    <!-- Right side: Provider selector -->
+    <!-- Right side: Provider selector only -->
     <app-provider-selector
       (providerChange)="onProviderChange($event)"
     ></app-provider-selector>
@@ -55,6 +52,12 @@
   >
     <p class="result-count">{{ getResultCountText() }}</p>
     <p class="provider-info">Provider: {{ currentProvider }}</p>
+    <!-- Update the selection-hint section -->
+
+    <p class="selection-hint" *ngIf="selectionService.getSelectedCount() > 0">
+      {{ selectionService.getSelectedCount() }} selected • 
+      Click to select, double-click to select only one
+    </p>
   </div>
 
   <!-- Icons Grid -->

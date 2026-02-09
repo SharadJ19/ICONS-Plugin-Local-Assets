@@ -7,30 +7,46 @@ import { Icon } from '../models/icon.model';
 @Injectable({ providedIn: 'root' })
 export class SelectionService {
   private selectedIcons = new BehaviorSubject<Icon[]>([]);
-  private selectionModeSubject = new BehaviorSubject<'single' | 'multi'>('single');
   
   selectedIcons$ = this.selectedIcons.asObservable();
-  selectionMode$ = this.selectionModeSubject.asObservable();
   
   toggleIcon(icon: Icon): void {
     const currentIcons = this.selectedIcons.value;
+    const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
     
-    if (this.selectionModeSubject.value === 'single') {
-      // For single mode, replace with the new icon
-      this.selectedIcons.next([icon]);
+    if (existingIndex > -1) {
+      // Remove if already selected
+      const newIcons = [...currentIcons];
+      newIcons.splice(existingIndex, 1);
+      this.selectedIcons.next(newIcons);
     } else {
-      // For multi mode, toggle the icon
-      const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
-      if (existingIndex > -1) {
-        // Remove if already selected
-        const newIcons = [...currentIcons];
-        newIcons.splice(existingIndex, 1);
-        this.selectedIcons.next(newIcons);
-      } else {
-        // Add if not selected
-        this.selectedIcons.next([...currentIcons, icon]);
-      }
+      // Add if not selected
+      this.selectedIcons.next([...currentIcons, icon]);
     }
+  }
+  
+  addIcon(icon: Icon): void {
+    const currentIcons = this.selectedIcons.value;
+    const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
+    
+    if (existingIndex === -1) {
+      this.selectedIcons.next([...currentIcons, icon]);
+    }
+  }
+  
+  removeIcon(icon: Icon): void {
+    const currentIcons = this.selectedIcons.value;
+    const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
+    
+    if (existingIndex > -1) {
+      const newIcons = [...currentIcons];
+      newIcons.splice(existingIndex, 1);
+      this.selectedIcons.next(newIcons);
+    }
+  }
+  
+  selectSingleIcon(icon: Icon): void {
+    this.selectedIcons.next([icon]);
   }
   
   isSelected(icon: Icon): boolean {
@@ -47,16 +63,5 @@ export class SelectionService {
   
   clearSelection(): void {
     this.selectedIcons.next([]);
-  }
-  
-  setSelectionMode(mode: 'single' | 'multi'): void {
-    this.selectionModeSubject.next(mode);
-    if (mode === 'single') {
-      // If switching to single mode, keep only the first selected icon
-      const currentIcons = this.selectedIcons.value;
-      if (currentIcons.length > 1) {
-        this.selectedIcons.next([currentIcons[0]]);
-      }
-    }
   }
 }

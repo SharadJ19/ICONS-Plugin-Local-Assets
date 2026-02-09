@@ -3,12 +3,15 @@
 <div class="selection-footer" [class.visible]="isVisible">
   <div class="selection-info">
     <span class="count">{{ selectedCount }} icon(s) selected</span>
+    <span class="hint" *ngIf="selectedCount > 0">
+      {{ getSelectionHint() }}
+    </span>
   </div>
   
   <div class="selection-actions">
     <button mat-button class="clear-btn" (click)="onClearSelection()">
       <mat-icon>close</mat-icon>
-      Clear
+      Clear ({{ selectedCount }})
     </button>
     
     <button mat-raised-button class="add-btn" (click)="onAddToProject()">

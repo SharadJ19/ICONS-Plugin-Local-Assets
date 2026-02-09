@@ -43,11 +43,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
+  // Make selectionService public for template access
   constructor(
     private providerRegistry: ProviderRegistryService,
     private downloadService: DownloadService,
     private environment: EnvironmentService,
-    private selectionService: SelectionService
+    public selectionService: SelectionService  // Changed to public
   ) {}
 
   ngOnInit(): void {
