@@ -1,21 +1,82 @@
-# Icons Aggregator 🎨⚡
+# Iconografix - Icon Library & Search Tool
+
+![Angular](https://img.shields.io/badge/Angular-16+-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![Material Design](https://img.shields.io/badge/Material%20Design-757575?style=for-the-badge&logo=material-design&logoColor=white)
+![SVG](https://img.shields.io/badge/SVG-FFB13B?style=for-the-badge&logo=svg&logoColor=white)
 
 <img src="src/Iconografix.png" alt="Iconografix Logo" width="500" height="300">
 
-A beautiful Angular application that aggregates SVG icons from multiple providers (Iconoir & Bootstrap) into a single, unified interface.  
-Search, browse, and download high-quality icons with a clean, modern UI and extensible architecture.
+A comprehensive, offline-first icon library application built with Angular that allows users to browse, search, and use icons from 8 popular icon libraries. Supports both standalone web usage and embedded plugin mode.
 
 ## ✨ Features
 
-- 🔍 **Smart Search** – Find icons across multiple providers instantly
-- 🎲 **Random Discovery** – Get inspired with random icon selections
-- 🔄 **Multi-Provider Support** – Switch between Iconoir & Bootstrap seamlessly
-- ⬇️ **One-Click Downloads** – Download SVG icons with proper formatting
-- 📱 **Fully Responsive** – Works perfectly on all devices
-- 🎯 **Debounced Search** – Optimized performance with intelligent search
-- 📦 **Pagination** – Load more icons as you scroll
-- 🛡️ **Secure SVG Rendering** – Safe, sanitized SVG previews
-- 🎨 **Modern UI** – Built with Angular Material & custom styling
+### 🎯 Core Functionality
+- **8 Icon Libraries**: Bootstrap, Feather, Gilbarbara, Heroicons, Iconoir, Simple Icons, Brand Logos, and Tabler
+- **Offline-First**: All icons are stored locally in assets - no external API dependencies
+- **Smart Search**: Real-time search across all providers with intelligent matching
+- **Multi/Single Selection**: Toggle between single icon selection and multi-select mode
+- **Direct Integration**: Send selected icons directly to parent applications as base64 SVG
+
+### 🎨 User Experience
+- **Responsive Design**: Mobile-first approach with adaptive grid layouts
+- **Modern UI**: Clean, intuitive interface with smooth animations
+- **Visual Feedback**: Hover effects, selection indicators, and loading states
+- **Tooltips**: Icon name tooltips with optimal positioning
+- **Accessibility**: Keyboard navigation and screen reader support
+
+### 🔧 Technical Features
+- **Module Federation**: Plugin-ready architecture for embedded usage
+- **Caching**: SVG content caching for improved performance
+- **Smart Pagination**: Infinite scroll with load-more functionality
+- **Error Handling**: Graceful fallbacks for missing icons
+- **Standalone Components**: Modern Angular standalone component architecture
+- **Type Safety**: Full TypeScript implementation with interfaces
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── icon-card/              # Individual icon display component
+│   │   ├── loading-spinner/        # Loading animation component
+│   │   ├── mode-selector/          # Single/Multi selection toggle
+│   │   ├── provider-selector/      # Icon library dropdown selector
+│   │   └── selection-footer/       # Bottom selection panel
+│   ├── core/
+│   │   ├── interceptors/           # HTTP interceptors for error handling
+│   │   ├── models/                 # TypeScript interfaces and models
+│   │   ├── services/
+│   │   │   ├── providers/          # Icon provider services
+│   │   │   ├── config.service.ts   # Configuration management
+│   │   │   ├── download.service.ts # Icon download functionality
+│   │   │   ├── environment.service.ts
+│   │   │   └── selection.service.ts # State management for selections
+│   │   └── types/                  # Type definitions
+│   ├── pages/
+│   │   └── home/                   # Main application page
+│   ├── ql-plugin/                  # Plugin module for embedded usage
+│   │   ├── ql-default-plugin/      # Default plugin component
+│   │   ├── ql-plugin.module.ts     # Plugin module definition
+│   │   └── ql-plugin-routing.module.ts
+│   ├── app.component.ts            # Root application component
+│   ├── app.module.ts               # Main application module
+│   └── app-routing.module.ts       # Application routing
+├── assets/
+│   └── icons/                      # Local icon libraries storage
+│       ├── bootstrap/
+│       ├── feather/
+│       ├── gilbarbara/
+│       ├── heroicons-24-solid/
+│       ├── iconoir/
+│       ├── simple-icons/
+│       ├── simple-svg-brand-logos/
+│       └── tabler/
+│           └── manifest.json       # Each library has its own manifest
+├── environments/                   # Environment configurations
+├── index.html                      # Main HTML entry point
+└── styles.css                      # Global styles
+```
 
 ## 🖼️ Screenshots
 
@@ -23,169 +84,217 @@ Search, browse, and download high-quality icons with a clean, modern UI and exte
 |-------------|----------------|
 | ![Random](screenshots/random.png) | ![Search](screenshots/search.png) |
 
-## 🏗️ Architecture Overview
+## 🚀 Installation & Setup
 
-```
-src/
-├── components/           🧩 Reusable UI Components
-│   ├── icon-card/          → Icon display + download
-│   ├── provider-selector/  → Provider switcher
-│   └── loading-spinner/    → Animated loading states
-│
-├── core/                  🧠 Core Business Logic
-│   ├── models/              → Data structures & interfaces
-│   ├── services/            → Core services
-│   │   ├── providers/       → Provider implementations
-│   │   ├── download.service.ts           → Icon download logic
-│   │   └── provider-registry.service.ts  → Provider management
-│   └── interceptors/                     → HTTP interceptors
-│
-├── pages/               📄 Page Components
-│   └── home/             → Main application page
-│
-└── environments/        ⚙️ Environment configuration
+### Prerequisites
+- Node.js 22+ and npm
+- Angular CLI 16
+
+### Installation Steps
+
+1. **Clone and install dependencies:**
+```bash
+git clone https://github.com/SharadJ19/ICONS-Plugin-Local-Assets
+cd ICONS-Plugin-Local-Assets
+npm install
 ```
 
-For a detailed breakdown of system design, architectural decisions, design patterns, and scalability considerations, see:
+2. **Ensure icon assets are properly placed:**
+```bash
+# Icon libraries should be placed in:
+src/assets/icons/
+# Each library should have:
+# - Individual SVG files
+# - manifest.json listing all available icons
+```
 
-#### 📘 Additional Docs:
-1. **[Architecture Docs](docs/ARCHITECTURE.md)**
-2. **[Module Federation Docs](docs/MODULE-FEDERATION.md)**
+3. **Development server:**
+```bash
+ng serve
+# Navigate to http://localhost:4200
+```
 
-## 🔌 Provider System (Extensible Design)
+4. **Production build:**
+```bash
+ng build --configuration production
+```
 
-Each provider implements a common interface:
+## 🎮 Usage Guide
+
+### Basic Usage
+1. **Browse Icons**: Click "Random" to load icons from the selected provider
+2. **Search**: Type in the search box to find specific icons
+3. **Select Provider**: Use the dropdown to switch between 8 icon libraries
+4. **Select Icons**: Click on icons to select them (supports both single and multi-select)
+5. **Add to Project**: Use the selection footer to send icons to parent applications
+
+### Selection Modes
+- **Single Select**: Clicking an icon replaces previous selection
+- **Multi Select**: Clicking toggles icons on/off, allowing multiple selections
+
+### Integration as Plugin
+The application can be embedded as a plugin using Module Federation:
 
 ```typescript
-interface IconProvider {
-  readonly name: string;
-  readonly displayName: string;
-  
-  search(query: string, limit: number, offset: number): Observable<IconApiResponse>;
-  getRandom(limit: number, offset: number): Observable<IconApiResponse>;
+// In host application
+import('iconografix/QlPluginModule')
+  .then(m => {
+    // Use the plugin module
+  });
+```
+
+Selected icons are sent to the parent window via `postMessage` with base64-encoded SVG data.
+
+## 🏗️ Architecture
+
+### Provider System
+The application uses a modular provider system where each icon library is implemented as a `LocalAssetProviderService`:
+
+```typescript
+interface LocalAssetProviderService {
+  name: string;           // Unique identifier
+  displayName: string;    // User-friendly name
+  baseUrl: string;        // Path to icon assets
+  initialize(): Observable<boolean>;  // Load manifest and icons
+  search(query, limit, offset): Observable<IconApiResponse>;
+  getRandom(limit, offset): Observable<IconApiResponse>;
+  getSvgContent(icon): Observable<string>;
 }
 ```
 
-The **Provider Registry Service** handles:
-- 📝 Provider registration & management
-- 🔄 Active provider switching
-- 🎯 Unified API for all providers
+### State Management
+- **Selection Service**: Manages icon selection state and mode (single/multi)
+- **Provider Registry**: Central registry for all icon providers
+- **Reactive Forms**: Search functionality with debounced input
+- **Observable Streams**: RxJS for asynchronous operations and state updates
 
-**Easy to add new providers** (Material Icons, Font Awesome, etc.) without changing UI logic!
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-- Angular CLI (optional)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/SharadJ19/GIF-Plugin-Standalone/
-cd icons-aggregator
-
-# Install dependencies
-npm install
-
-# Start development server
-ng serve
-```
-
-Navigate to `http://localhost:4200` in your browser.
-
-### Building for Production
-
-```bash
-# Build the project
-ng build --configuration production
-
-# The build artifacts will be stored in the dist/ directory
-```
-
-## 📖 How to Use
-
-1. **Search Icons**: Type in the search box to find icons by name
-2. **Random Icons**: Click "Random" to discover new icons
-3. **Switch Providers**: Use the provider selector to switch between Iconoir & Bootstrap
-4. **Download Icons**: Click the download button on any icon card
-5. **Load More**: Scroll down and click "Load More" for additional icons
-
-## 🛠️ Tech Stack
-
-- **Angular 15+** – Modern web framework
-- **TypeScript** – Type-safe development
-- **RxJS** – Reactive programming
-- **Angular Material** – UI component library
-- **GitHub API** – Icon source integration
-- **CSS3/SCSS** – Modern styling with custom animations
+### Performance Optimizations
+- **Lazy Loading**: Icons are loaded on-demand as needed
+- **SVG Caching**: Once loaded, SVG content is cached locally
+- **Virtual Scrolling**: Grid supports infinite scroll with pagination
+- **Asset Preloading**: Provider manifests are loaded at startup
 
 ## 🔧 Configuration
 
-### Environment Setup
-
-1. Create a GitHub Personal Access Token (optional, for higher rate limits)
-2. Configure in `src/environments/environment.ts`:
+### Environment Variables
+Edit `src/environments/environment.ts` and `environment.prod.ts`:
 
 ```typescript
 export const environment = {
   production: false,
-  githubToken: 'your_github_token_here', // Optional
-  // ... other config
+  apiConfig: {
+    defaultLimit: 30,     // Icons per page
+    maxLimit: 100         // Maximum icons per request
+  },
+  providers: {
+    iconoir: {
+      path: 'iconoir',
+      displayName: 'Iconoir'
+    }
+    // ... other providers
+  },
+  uiConfig: {
+    defaultProvider: 'ICONOIR',
+    gridColumns: {
+      xs: 2,
+      sm: 4,
+      md: 6,
+      lg: 8
+    }
+  }
 };
 ```
 
-### Adding a New Icon Provider
-
-1. Create a new provider service extending `BaseProviderService`
-2. Implement the required methods
-3. Register in `AppComponent`:
-
-```typescript
-this.providerRegistry.registerProvider(
-  'NEW_PROVIDER',
-  'New Provider',
-  this.newProviderService
-);
-```
+### Adding New Icon Libraries
+1. Add SVG files to `src/assets/icons/new-library/`
+2. Create a `manifest.json` listing all SVG files
+3. Add provider configuration in environment files
+4. Register provider in `ProviderRegistryService`
 
 ## 📱 Responsive Design
 
-- **Mobile** (≤767px): 2-3 columns
-- **Tablet** (768px-1023px): 4-6 columns  
-- **Desktop** (≥1024px): 6-8 columns
+The application is fully responsive with breakpoints:
+- **Mobile (< 480px)**: 2-3 columns
+- **Tablet (768px)**: 4-5 columns
+- **Desktop (1024px+)**: 6-10 columns
 
-## 🎨 Design Features
+## 🔌 Plugin Integration API
 
-- **Orange Accent Theme** (#FF9100) – Consistent color scheme
-- **Smooth Animations** – Hover effects & transitions
-- **Glassmorphism Elements** – Modern UI components
-- **Custom Scrollbars** – Themed scrolling experience
-- **Accessible** – Keyboard navigation & ARIA labels
+When running in plugin mode, selected icons are sent to the parent window:
+
+```javascript
+window.parent.postMessage({
+  type: 'ADD_OBJECT',
+  payload: {
+    dataString: 'data:image/svg+xml;base64,...',
+    type: 'stickerbox',
+    metaData: {
+      name: 'Icon Name',
+      provider: 'ICONOIR',
+      fileName: 'icon_name_iconoir.svg'
+    }
+  }
+}, '*');
+```
+
+## 🚨 Error Handling
+
+The application includes comprehensive error handling:
+- **Network errors**: Graceful fallback to local assets
+- **Missing icons**: Fallback SVG displayed
+- **Invalid searches**: Clear empty states with helpful messages
+- **Provider failures**: Individual provider failures don't break the app
+
+## 📄 Manifest Format
+
+Each icon library requires a `manifest.json`:
+
+```json
+{
+  "files": [
+    "icon1.svg",
+    "icon2.svg",
+    "..."
+  ]
+}
+```
+
+## 🧪 Development
+
+### Running Tests
+```bash
+ng test
+```
+
+### Building for Production
+```bash
+ng build --configuration production
+```
+
+### Code Structure Guidelines
+- Components are feature-based and self-contained
+- Services are singleton and provided in root
+- Models are TypeScript interfaces for type safety
+- Styles follow BEM-like naming conventions
+- Mobile-first responsive design approach
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
+<!-- ## 📄 License -->
 
-## 👨‍💻 Author
-
-**Sharad Chandel**  
-R&D Intern  
-*(Project shared with mentor for review & feedback)*
+<!-- This project is licensed under the MIT License - see the LICENSE file for details.  -->
 
 ## 🙏 Acknowledgments
 
-- [Iconoir](https://iconoir.com/) – For the beautiful icon set
-- [Bootstrap Icons](https://icons.getbootstrap.com/) – For the comprehensive icon library
-- [Angular Team](https://angular.io/) – For the amazing framework
-- [GitHub](https://github.com) – For API access & hosting
+- Ashu Ma'am for the Guidance and Support throughout the project development
+- All icon library authors and maintainers
+- Angular and Material Design teams
+- Contributors and testers
 
-
-⭐ **Star this repo if you find it useful!** ⭐
+**Built with ❤️ using Angular and Material Design**
