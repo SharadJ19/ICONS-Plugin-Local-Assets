@@ -134,11 +134,8 @@ export class IconCardComponent implements OnInit, OnDestroy {
 
   // Add this method to the IconCardComponent class
 
+  // Change the getTooltipText method to show only the icon name
   getTooltipText(): string {
-    const baseText = this.icon.displayName;
-    if (this.isSelected) {
-      return `${baseText} (Selected) - Double-click to select only this icon`;
-    }
-    return `${baseText} - Click to select, double-click to select only this`;
+    return this.icon.displayName; // Only show the icon name, no extra instructions
   }
 }

@@ -33,14 +33,13 @@ export class SelectionFooterComponent implements OnInit {
     });
   }
 
-      // Update the getSelectionHint method
-
-    getSelectionHint(): string {
-      if (this.selectedCount === 1) {
-        return 'Double-click icon to select only this icon';
-      }
-      return 'Click to select multiple, double-click to select only one';
+    // Update the getSelectionHint method to be minimal
+  getSelectionHint(): string {
+    if (this.selectedCount === 1) {
+      return 'Click to select multiple, double-click for single';
     }
+    return 'Click to select multiple';
+  }
 
   async onAddToProject(): Promise<void> {
     if (this.selectedIcons.length === 0) return;

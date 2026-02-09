@@ -52,12 +52,11 @@
   >
     <p class="result-count">{{ getResultCountText() }}</p>
     <p class="provider-info">Provider: {{ currentProvider }}</p>
-    <!-- Update the selection-hint section -->
 
-    <p class="selection-hint" *ngIf="selectionService.getSelectedCount() > 0">
-      {{ selectionService.getSelectedCount() }} selected • 
-      Click to select, double-click to select only one
-    </p>
+    <!-- Replace the selection-hint paragraph with a simpler version -->
+  <p class="selection-hint" *ngIf="selectionService.getSelectedCount() > 0">
+    {{ selectionService.getSelectedCount() }} selected
+  </p>
   </div>
 
   <!-- Icons Grid -->
