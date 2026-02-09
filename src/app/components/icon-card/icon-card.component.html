@@ -3,16 +3,18 @@
 <div 
   class="icon-card"
   [class.selected]="isSelected"
-  (click)="onSelect()"
-  [matTooltip]="icon.displayName"
+  (click)="onCardClick($event)"
+  [matTooltip]="getTooltipText()"
   matTooltipPosition="above"
   matTooltipShowDelay="300"
   matTooltipHideDelay="0"
 >
-  <!-- Move selection indicator directly into icon-preview -->
-  <div class="icon-preview" [innerHTML]="svgContent">
-    <div *ngIf="isSelected" class="selection-indicator">
-      <mat-icon>check</mat-icon>
-    </div>
-  </div>
+  <!-- Checkbox for multi-selection -->
+  <div 
+    class="selection-checkbox"
+    [class.selected]="isSelected"
+  ></div>
+  
+  <!-- Card content -->
+  <div class="icon-preview" [innerHTML]="svgContent"></div>
 </div>
