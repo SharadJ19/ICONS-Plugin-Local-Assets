@@ -206,8 +206,9 @@ export const environment = {
 ```
 
 ### Adding New Icon Libraries
+
 1. Add SVG files to `src/assets/icons/new-library/`
-2. Create a `manifest.json` listing all SVG files
+2. Run 'node .\scripts\generate-manifests.js' to generate it's manifest file.
 3. Add provider configuration in environment files
 4. Register provider in `ProviderRegistryService`
 
