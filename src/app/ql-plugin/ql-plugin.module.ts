@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+
 @NgModule({
   declarations: [
     QlDefaultPluginComponent,
@@ -46,6 +47,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SelectionFooterComponent,
   ],
 })
+
+
 export class QlPluginModule {
   static rootComponent = QlDefaultPluginComponent;
 }

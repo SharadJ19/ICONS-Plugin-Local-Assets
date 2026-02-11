@@ -7,14 +7,6 @@ import { environment } from '../../../environments/environment';
 export class ConfigService {
   private config = environment;
 
-  get apiConfig() {
-    return this.config.apiConfig;
-  }
-
-  get providerConfig() {
-    return this.config.providers;
-  }
-
   isProduction(): boolean {
     return this.config.production;
   }

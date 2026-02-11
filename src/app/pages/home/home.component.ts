@@ -26,6 +26,8 @@ import { SelectionService } from '../../core/services/selection.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
+
+
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef;
 

@@ -11,6 +11,7 @@ import { QlPluginModule } from './ql-plugin/ql-plugin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MatTooltipModule } from '@angular/material/tooltip'; // Add this import
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,4 +34,6 @@ import { MatTooltipModule } from '@angular/material/tooltip'; // Add this import
   ],
   bootstrap: [AppComponent],
 })
+
+
 export class AppModule { }
