@@ -111,7 +111,7 @@ src/assets/icons/
 3. **Development server:**
 ```bash
 ng serve
-# Navigate to http://localhost:4200
+# Navigate to http://localhost:4219
 ```
 
 4. **Production build:**
@@ -182,26 +182,13 @@ Edit `src/environments/environment.ts` and `environment.prod.ts`:
 ```typescript
 export const environment = {
   production: false,
-  apiConfig: {
-    defaultLimit: 30,     // Icons per page
-    maxLimit: 100         // Maximum icons per request
-  },
-  providers: {
-    iconoir: {
-      path: 'iconoir',
-      displayName: 'Iconoir'
-    }
-    // ... other providers
-  },
-  uiConfig: {
-    defaultProvider: 'ICONOIR',
-    gridColumns: {
-      xs: 2,
-      sm: 4,
-      md: 6,
-      lg: 8
-    }
-  }
+  defaultProvider: 'ICONOIR',
+  defaultLimit: 30,
+  enableDebugLogging: true,
+  assetsPath: '/assets/icons',
+  svgCacheTimeout: 3600000,
+  doubleClickThreshold: 300,
+  searchDebounceTime: 400
 };
 ```
 
