@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators';
 import { IconApiResponse } from '../../models/icon.model';
 import { LocalAssetProviderService } from './local-asset.provider.service';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../../../environments/environment';
 interface ProviderInfo {
   name: string;
   displayName: string;
@@ -29,6 +29,7 @@ export class ProviderRegistryService {
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
+    this.activeProvider = environment.defaultProvider; 
     this.initializeProviders();
   }
 
