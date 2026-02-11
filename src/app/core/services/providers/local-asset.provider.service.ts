@@ -1,11 +1,11 @@
-// src\app\core\services\providers\local-asset.provider.service.ts
-
+// src/app/core/services/providers/local-asset.provider.service.ts
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { BaseProviderService } from './base-provider.service';
 import { IconApiResponse, Icon } from '../../models/icon.model';
 import { HttpClient } from '@angular/common/http';
+import { EnvironmentService } from '../environment.service';
 
 export interface ProviderConfig {
   name: string;
@@ -20,16 +20,17 @@ export class LocalAssetProviderService extends BaseProviderService {
   
   private icons: Icon[] = [];
   private initialized = false;
-  private iconCache = new Map<string, string>();
+  private iconCache = new Map<string, { content: string; timestamp: number }>();
 
   constructor(
     private http: HttpClient,
+    private environment: EnvironmentService,
     config: ProviderConfig 
   ) {
     super();
     this.name = config.name;
     this.displayName = config.displayName;
-    this.baseUrl = `/assets/icons/${config.path}`;
+    this.baseUrl = `${this.environment.assetsPath}/${config.path}`;
   }
 
   initialize(): Observable<boolean> {
@@ -48,7 +49,9 @@ export class LocalAssetProviderService extends BaseProviderService {
         return true;
       }),
       catchError(error => {
-        console.warn(`Failed to load ${this.name} manifest:`, error);
+        if (this.environment.enableDebugLogging) {
+          console.warn(`Failed to load ${this.name} manifest:`, error);
+        }
         return this.scanDirectory().pipe(
           map(files => {
             this.icons = files.map(fileName => this.createIcon(fileName));
@@ -56,7 +59,9 @@ export class LocalAssetProviderService extends BaseProviderService {
             return true;
           }),
           catchError(scanError => {
-            console.error(`Failed to scan ${this.name} directory:`, scanError);
+            if (this.environment.enableDebugLogging) {
+              console.error(`Failed to scan ${this.name} directory:`, scanError);
+            }
             this.icons = [];
             this.initialized = true;
             return of(true);
@@ -136,19 +141,31 @@ export class LocalAssetProviderService extends BaseProviderService {
 
   getSvgContent(icon: Icon): Observable<string> {
     const cacheKey = `${icon.provider}_${icon.name}`;
+    const now = Date.now();
     
     if (this.iconCache.has(cacheKey)) {
-      return of(this.iconCache.get(cacheKey)!);
+      const cached = this.iconCache.get(cacheKey)!;
+      if (now - cached.timestamp < this.environment.svgCacheTimeout) {
+        return of(cached.content);
+      }
     }
 
     return this.http.get(icon.path, { responseType: 'text' }).pipe(
       tap(svgContent => {
-        this.iconCache.set(cacheKey, svgContent);
+        this.iconCache.set(cacheKey, {
+          content: svgContent,
+          timestamp: now
+        });
       }),
       catchError(error => {
-        console.warn(`Failed to load SVG for ${icon.name} from ${icon.path}:`, error);
+        if (this.environment.enableDebugLogging) {
+          console.warn(`Failed to load SVG for ${icon.name} from ${icon.path}:`, error);
+        }
         const fallbackSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff9100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`;
-        this.iconCache.set(cacheKey, fallbackSvg);
+        this.iconCache.set(cacheKey, {
+          content: fallbackSvg,
+          timestamp: now
+        });
         return of(fallbackSvg);
       })
     );

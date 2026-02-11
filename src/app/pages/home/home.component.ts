@@ -1,5 +1,4 @@
-// src\app\pages\home\home.component.ts
-
+// src/app/pages/home/home.component.ts
 import {
   Component,
   OnInit,
@@ -36,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentProvider = 'Iconoir';
 
   private offset = 0;
-  private readonly limit = 30;
+  private readonly limit: number;
   hasMore = true;
   currentMode: 'search' | 'random' = 'random';
   private totalIcons = 0;
@@ -48,7 +47,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private downloadService: DownloadService,
     private environment: EnvironmentService,
     public selectionService: SelectionService
-  ) {}
+  ) {
+    this.limit = this.environment.defaultLimit;
+  }
 
   ngOnInit(): void {
     this.setupSearch();
@@ -63,7 +64,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private setupSearch(): void {
     this.searchControl.valueChanges
-      .pipe(debounceTime(400), distinctUntilChanged(), takeUntil(this.destroy$))
+      .pipe(
+        debounceTime(this.environment.searchDebounceTime), 
+        distinctUntilChanged(), 
+        takeUntil(this.destroy$)
+      )
       .subscribe((query) => {
         if (query && query.trim()) {
           this.onSearch(query);
@@ -125,7 +130,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onDownload(icon: Icon): void {
     this.downloadService.downloadIcon(icon).catch((error) => {
-      console.error('Download failed:', error);
+      if (this.environment.enableDebugLogging) {
+        console.error('Download failed:', error);
+      }
     });
   }
 
@@ -170,7 +177,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private handleError(error: any): void {
-    console.error('API Error:', error);
+    if (this.environment.enableDebugLogging) {
+      console.error('API Error:', error);
+    }
     this.hasMore = false;
   }
 
