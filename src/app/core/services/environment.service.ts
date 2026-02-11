@@ -11,4 +11,28 @@ export class EnvironmentService {
   get defaultProvider(): string {
     return environment.defaultProvider;
   }
+
+  get defaultLimit(): number {
+    return environment.defaultLimit;
+  }
+
+  get enableDebugLogging(): boolean {
+    return environment.enableDebugLogging;
+  }
+
+  get assetsPath(): string {
+    return environment.assetsPath;
+  }
+
+  get svgCacheTimeout(): number {
+    return environment.svgCacheTimeout;
+  }
+
+  get doubleClickThreshold(): number {
+    return environment.doubleClickThreshold;
+  }
+
+  get searchDebounceTime(): number {
+    return environment.searchDebounceTime;
+  }
 }

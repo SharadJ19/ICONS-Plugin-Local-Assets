@@ -1,5 +1,4 @@
-// src\app\components\icon-card\icon-card.component.ts
-
+// src/app/components/icon-card/icon-card.component.ts
 import {
   Component,
   Input,
@@ -14,7 +13,8 @@ import { DownloadService } from '../../core/services/download.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ProviderRegistryService } from '../../core/services/providers/provider-registry.service';
 import { SelectionService } from '../../core/services/selection.service';
-import { Subject } from 'rxjs';
+import { EnvironmentService } from '../../core/services/environment.service';
+import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -30,7 +30,7 @@ export class IconCardComponent implements OnInit, OnDestroy {
   isLoading = true;
   isSelected = false;
   private lastClickTime = 0;
-  private readonly DOUBLE_CLICK_THRESHOLD = 300; // ms
+  private readonly DOUBLE_CLICK_THRESHOLD: number;
 
   private destroy$ = new Subject<void>();
 
@@ -38,8 +38,11 @@ export class IconCardComponent implements OnInit, OnDestroy {
     private downloadService: DownloadService,
     private sanitizer: DomSanitizer,
     private providerRegistry: ProviderRegistryService,
-    private selectionService: SelectionService
-  ) {}
+    private selectionService: SelectionService,
+    private environment: EnvironmentService
+  ) {
+    this.DOUBLE_CLICK_THRESHOLD = this.environment.doubleClickThreshold;
+  }
 
   ngOnInit(): void {
     this.loadSvg();

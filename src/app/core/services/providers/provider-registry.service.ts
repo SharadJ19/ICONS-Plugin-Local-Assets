@@ -1,5 +1,4 @@
-// src\app\core\services\providers\provider-registry.service.ts
-
+// src/app/core/services/providers/provider-registry.service.ts
 import { Injectable, Injector, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, forkJoin, of, BehaviorSubject } from 'rxjs';
@@ -8,6 +7,8 @@ import { IconApiResponse } from '../../models/icon.model';
 import { LocalAssetProviderService } from './local-asset.provider.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { EnvironmentService } from '../environment.service';
+
 interface ProviderInfo {
   name: string;
   displayName: string;
@@ -18,7 +19,7 @@ interface ProviderInfo {
 @Injectable({ providedIn: 'root' })
 export class ProviderRegistryService {
   private providers = new Map<string, ProviderInfo>();
-  private activeProvider: string = 'ICONOIR';
+  private activeProvider: string;
   private providersSubject = new BehaviorSubject<ProviderInfo[]>([]);
   private initialized = false;
   private isBrowser: boolean;
@@ -26,10 +27,11 @@ export class ProviderRegistryService {
   constructor(
     private injector: Injector,
     private http: HttpClient,
+    private environment: EnvironmentService,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
-    this.activeProvider = environment.defaultProvider; 
+    this.activeProvider = this.environment.defaultProvider;
     this.initializeProviders();
   }
 
@@ -50,6 +52,7 @@ export class ProviderRegistryService {
     providersConfig.forEach(config => {
       const provider = new LocalAssetProviderService(
         this.http,
+        this.environment,
         { name: config.name, displayName: config.displayName, path: config.path }
       );
       this.providers.set(config.name, {
@@ -64,11 +67,15 @@ export class ProviderRegistryService {
     this.initializeAllProviders().subscribe({
       next: () => {
         this.initialized = true;
-        console.log('All providers initialized');
+        if (this.environment.enableDebugLogging) {
+          console.log('All providers initialized');
+        }
         this.providersSubject.next(this.getProvidersList());
       },
       error: (error) => {
-        console.error('Failed to initialize providers:', error);
+        if (this.environment.enableDebugLogging) {
+          console.error('Failed to initialize providers:', error);
+        }
       }
     });
   }
@@ -80,7 +87,9 @@ export class ProviderRegistryService {
       const initObs = providerInfo.service.initialize().pipe(
         map(() => void 0),
         catchError(error => {
-          console.error(`Failed to initialize ${providerInfo.name}:`, error);
+          if (this.environment.enableDebugLogging) {
+            console.error(`Failed to initialize ${providerInfo.name}:`, error);
+          }
           return of(void 0);
         })
       );
@@ -132,7 +141,9 @@ export class ProviderRegistryService {
   getSvgContent(icon: any): Observable<string> {
     const provider = this.providers.get(icon.provider);
     if (!provider) {
-      console.error(`Provider not found: ${icon.provider}`);
+      if (this.environment.enableDebugLogging) {
+        console.error(`Provider not found: ${icon.provider}`);
+      }
       return of('');
     }
     return provider.service.getSvgContent(icon);
