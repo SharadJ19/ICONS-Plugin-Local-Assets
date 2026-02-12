@@ -37,20 +37,20 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 4px;
 }
 
 .powered-by {
-  font-size: 11px;
-  font-weight: 400;
-  color: #64748b;
-  letter-spacing: 0.3px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   line-height: 1.2;
 }
 
 .brand-logo {
-  height: 28px;
+  height: 40px; /* Increased from 28px */
   width: auto;
   object-fit: contain;
   display: block;
@@ -407,7 +407,7 @@
 }
 
 /* =====================================================
-   Mobile Responsive - ULTRA COMPACT
+   Mobile Responsive - ULTRA COMPACT with larger logo
    ===================================================== */
 @media (max-width: 639px) {
   .container {
@@ -429,15 +429,15 @@
   .logo-wrapper {
     width: 100%;
     align-items: flex-start;
-    gap: 2px;
+    gap: 3px;
   }
 
   .powered-by {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .brand-logo {
-    height: 24px;
+    height: 32px; /* Increased from 24px */
   }
 
   .controls {
@@ -469,7 +469,7 @@
   }
 
   .icons-grid {
-    gap: 8px; /* Compact on mobile */
+    gap: 8px;
   }
 
   .empty-state {
@@ -495,11 +495,11 @@
   }
   
   .brand-logo {
-    height: 22px;
+    height: 28px; /* Increased from 22px */
   }
   
   .icons-grid {
-    gap: 6px; /* Even more compact for very small screens */
+    gap: 6px;
   }
 }
 
