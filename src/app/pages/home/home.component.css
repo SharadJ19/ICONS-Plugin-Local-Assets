@@ -15,15 +15,45 @@
 }
 
 /* =====================================================
-   Header
+   Header - FIXED: Powered by Quark Xpress logo
    ===================================================== */
 .header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
   margin-bottom: 24px;
   border-bottom: 2px solid #f1f5f9;
+}
+
+/* Brand Section - Left side with improved logo layout */
+.brand-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.powered-by {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1e293b;
+  letter-spacing: 0.3px;
+  text-transform: lowercase;
+  line-height: 1.2;
+}
+
+.brand-logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: all 0.2s ease;
 }
 
 /* =====================================================
@@ -368,11 +398,34 @@
 }
 
 /* =====================================================
-   Mobile Responsive
+   Mobile Responsive - FIXED: Better logo scaling
    ===================================================== */
 @media (max-width: 768px) {
   .container {
     padding: 16px 12px 100px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .brand-section {
+    width: 100%;
+  }
+
+  .logo-wrapper {
+    width: 100%;
+    align-items: baseline;
+  }
+
+  .powered-by {
+    font-size: 12px;
+  }
+
+  .brand-logo {
+    height: 28px;
   }
 
   .controls {
@@ -423,6 +476,27 @@
   .icons-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+  }
+
+  .powered-by {
+    font-size: 11px;
+  }
+
+  .brand-logo {
+    height: 24px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .logo-wrapper {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .brand-logo {
+    height: 22px;
   }
 }
 
