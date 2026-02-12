@@ -2,7 +2,7 @@
 export const environment = {
   production: true,
   defaultProvider: 'ICONOIR',
-  defaultLimit: 32,
+  defaultLimit: 24,
   enableDebugLogging: false,
   assetsPath: '/assets/icons',
   svgCacheTimeout: 3600000,

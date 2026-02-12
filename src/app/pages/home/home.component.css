@@ -15,41 +15,42 @@
 }
 
 /* =====================================================
-   Header - FIXED: Powered by Quark Xpress logo
+   Header - FIXED: Powered by Quark Xpress logo (text above logo)
    ===================================================== */
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding-bottom: 20px;
   margin-bottom: 24px;
   border-bottom: 2px solid #f1f5f9;
 }
 
-/* Brand Section - Left side with improved logo layout */
+/* Brand Section - Left side with text above logo */
 .brand-section {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .logo-wrapper {
   display: flex;
-  align-items: baseline;
-  gap: 6px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
 
 .powered-by {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 400;
-  color: #1e293b;
+  color: #64748b;
   letter-spacing: 0.3px;
-  text-transform: lowercase;
+  text-transform: uppercase;
   line-height: 1.2;
 }
 
 .brand-logo {
-  height: 32px;
+  height: 28px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -62,13 +63,13 @@
 .controls {
   display: flex;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   align-items: center;
 }
 
 .search-box {
   flex: 1;
-  min-width: 0; /* Prevents flex overflow */
+  min-width: 0;
 }
 
 .search-input-wrapper {
@@ -80,22 +81,22 @@
 
 .search-icon {
   position: absolute;
-  left: 16px;
+  left: 14px;
   color: #94a3b8;
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
   pointer-events: none;
   z-index: 1;
 }
 
 .search-input {
   width: 100%;
-  height: 48px;
-  padding: 12px 48px 12px 48px; /* Left padding for icon, right padding for clear button */
+  height: 44px;
+  padding: 10px 44px 10px 44px;
   border: 2px solid #e2e8f0;
-  border-radius: 24px; /* Pill shape */
-  font-size: 15px;
+  border-radius: 22px;
+  font-size: 14px;
   color: #1e293b;
   background: white;
   transition: all 0.2s ease;
@@ -117,9 +118,9 @@
 /* Clear button - elegant X */
 .clear-search-btn {
   position: absolute;
-  right: 12px;
-  width: 28px;
-  height: 28px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: none;
   background: #f1f5f9;
@@ -144,23 +145,23 @@
 }
 
 .clear-search-btn mat-icon {
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
-  line-height: 18px;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
 }
 
 /* Random Button */
 .random-btn {
-  height: 48px;
-  padding: 0 24px;
-  border-radius: 24px !important; /* Pill shape to match search */
-  font-size: 15px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 22px !important;
+  font-size: 14px;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -190,9 +191,9 @@
 }
 
 .random-btn mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,74 +206,82 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  margin-bottom: 24px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
   background: white;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid #f1f5f9;
 }
 
 .result-count {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #64748b;
 }
 
 .provider-info {
   margin: 0;
-  padding: 4px 12px;
+  padding: 4px 10px;
   background: rgba(255, 145, 0, 0.1);
-  border-radius: 16px;
+  border-radius: 14px;
   color: #ff9100;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
   border: 1px solid rgba(255, 145, 0, 0.2);
 }
 
 /* =====================================================
-   Icons Grid
+   Icons Grid - ULTRA COMPACT
    ===================================================== */
 .icons-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   grid-auto-flow: dense;
 }
 
-@media (min-width: 480px) {
-  .icons-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
+/* Tablet - compact */
 @media (min-width: 640px) {
   .icons-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
 }
 
 @media (min-width: 768px) {
   .icons-grid {
     grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
   }
 }
 
+/* Desktop - compact */
 @media (min-width: 1024px) {
   .icons-grid {
     grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
   }
 }
 
 @media (min-width: 1280px) {
   .icons-grid {
     grid-template-columns: repeat(7, 1fr);
+    gap: 14px;
   }
 }
 
 @media (min-width: 1440px) {
   .icons-grid {
     grid-template-columns: repeat(8, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .icons-grid {
+    grid-template-columns: repeat(9, 1fr);
+    gap: 16px;
   }
 }
 
@@ -286,48 +295,48 @@
    ===================================================== */
 .empty-state {
   text-align: center;
-  padding: 64px 24px;
+  padding: 48px 20px;
   color: #64748b;
   background: white;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 2px dashed #e2e8f0;
 }
 
 .empty-icon {
-  font-size: 56px;
-  width: 56px;
-  height: 56px;
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
   color: #cbd5e1;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .empty-state h2 {
-  font-size: 20px;
+  font-size: 18px;
   color: #1e293b;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   font-weight: 600;
 }
 
 .empty-state p {
-  font-size: 15px;
+  font-size: 14px;
   color: #64748b;
-  margin: 0 0 24px 0;
-  max-width: 400px;
+  margin: 0 0 20px 0;
+  max-width: 360px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .try-again-btn {
-  height: 44px;
-  padding: 0 28px;
-  border-radius: 22px !important;
-  font-size: 14px;
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 20px !important;
+  font-size: 13px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   cursor: pointer;
   background: #ff9100 !important;
@@ -344,16 +353,16 @@
 }
 
 .try-again-btn mat-icon {
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
 }
 
 /* =====================================================
    Loading
    ===================================================== */
 .loading-section {
-  margin: 48px 0;
+  margin: 40px 0;
   display: flex;
   justify-content: center;
 }
@@ -364,19 +373,19 @@
 .footer {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 .load-more-btn {
-  height: 44px;
-  padding: 0 32px;
-  border-radius: 22px !important;
-  font-size: 14px;
+  height: 40px;
+  padding: 0 28px;
+  border-radius: 20px !important;
+  font-size: 13px;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -392,23 +401,25 @@
 }
 
 .load-more-btn mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 /* =====================================================
-   Mobile Responsive - FIXED: Better logo scaling
+   Mobile Responsive - ULTRA COMPACT
    ===================================================== */
-@media (max-width: 768px) {
+@media (max-width: 639px) {
   .container {
-    padding: 16px 12px 100px;
+    padding: 16px 10px 100px;
   }
 
   .header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 14px;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .brand-section {
@@ -417,20 +428,23 @@
 
   .logo-wrapper {
     width: 100%;
-    align-items: baseline;
+    align-items: flex-start;
+    gap: 2px;
   }
 
   .powered-by {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .brand-logo {
-    height: 28px;
+    height: 24px;
   }
 
   .controls {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 16px;
   }
 
   .search-box {
@@ -438,79 +452,68 @@
   }
 
   .search-input {
-    height: 44px;
-    font-size: 14px;
+    height: 42px;
+    font-size: 13px;
+    padding: 8px 42px 8px 42px;
   }
 
   .random-btn {
     width: 100%;
-    height: 44px;
+    height: 42px;
+    font-size: 13px;
   }
 
   .results-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
   }
 
   .icons-grid {
-    gap: 12px;
+    gap: 8px; /* Compact on mobile */
   }
 
   .empty-state {
-    padding: 48px 20px;
+    padding: 40px 16px;
   }
 
   .empty-icon {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
+    font-size: 44px;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 12px;
   }
 
   .empty-state h2 {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
-@media (max-width: 480px) {
-  .icons-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .powered-by {
-    font-size: 11px;
-  }
-
-  .brand-logo {
-    height: 24px;
-  }
-}
-
-/* Extra small devices */
+/* Very small devices */
 @media (max-width: 360px) {
-  .logo-wrapper {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
+  .container {
+    padding: 12px 8px 100px;
   }
   
   .brand-logo {
     height: 22px;
+  }
+  
+  .icons-grid {
+    gap: 6px; /* Even more compact for very small screens */
   }
 }
 
 /* Better touch targets */
 @media (max-width: 768px) {
   .clear-search-btn {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
   
   .clear-search-btn mat-icon {
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -518,7 +521,7 @@
 :focus-visible {
   outline: 2px solid #ff9100;
   outline-offset: 2px;
-  border-radius: 24px;
+  border-radius: 22px;
 }
 
 /* Animation for clear button */
