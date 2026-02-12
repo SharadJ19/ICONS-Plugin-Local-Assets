@@ -1,9 +1,8 @@
-<!-- src\app\pages\home\home.component.html -->
+<!-- src/app/pages/home/home.component.html -->
 
 <div class="container">
   <!-- Header -->
   <header class="header">
-    <!-- Right side -->
     <app-provider-selector
       (providerChange)="onProviderChange($event)"
     ></app-provider-selector>
@@ -13,25 +12,28 @@
   <div class="controls">
     <div class="search-box">
       <div class="search-input-wrapper">
+        <mat-icon class="search-icon">search</mat-icon>
+        
         <input
           type="text"
           [formControl]="searchControl"
-          placeholder="Search icons by name..."
+          placeholder="Search icons..."
           class="search-input"
           #searchInput
         />
-        <mat-icon class="search-icon">search</mat-icon>
+        
+        <!-- Clear button - elegant X that appears when typing -->
+        <button 
+          *ngIf="searchControl.value"
+          class="clear-search-btn"
+          (click)="clearSearch()"
+          type="button"
+          matTooltip="Clear search"
+          matTooltipPosition="right"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-
-      <button
-        mat-button
-        (click)="onSearch()"
-        [disabled]="!searchControl.value?.trim() || isLoading"
-        class="search-btn"
-      >
-        <mat-icon>search</mat-icon>
-        {{ isLoading && currentMode === "search" ? "Searching..." : "Search" }}
-      </button>
     </div>
 
     <button
@@ -39,9 +41,10 @@
       (click)="onRandom()"
       [disabled]="isLoading"
       class="random-btn"
+      [class.active]="currentMode === 'random'"
     >
       <mat-icon>shuffle</mat-icon>
-      {{ isLoading && currentMode === "random" ? "Loading..." : "Random" }}
+      <span>Random</span>
     </button>
   </div>
 
@@ -51,8 +54,7 @@
     *ngIf="icons.length > 0 || searchControl.value?.trim()"
   >
     <p class="result-count">{{ getResultCountText() }}</p>
-    <p class="provider-info">Provider: {{ currentProvider }}</p>
-
+    <p class="provider-info">{{ currentProvider }}</p>
   </div>
 
   <!-- Icons Grid -->
@@ -66,16 +68,16 @@
 
   <!-- Empty State -->
   <div class="empty-state" *ngIf="icons.length === 0 && !isLoading">
-    <mat-icon class="empty-icon">apps</mat-icon>
-    <h2>No Icons Found</h2>
+    <mat-icon class="empty-icon">search_off</mat-icon>
+    <h2>No icons found</h2>
     <p *ngIf="searchControl.value?.trim()">
-      No icons found for "{{ searchControl.value }}" in {{ currentProvider }}
+      We couldn't find any matches for "{{ searchControl.value }}"
     </p>
     <p *ngIf="!searchControl.value?.trim()">
-      Click "Random" to load icons from {{ currentProvider }}
+      Start typing to search or click Random to explore
     </p>
     <button mat-button (click)="onRandom()" class="try-again-btn">
-      <mat-icon>refresh</mat-icon>
+      <mat-icon>shuffle</mat-icon>
       Load Random Icons
     </button>
   </div>
@@ -84,16 +86,14 @@
   <div class="loading-section" *ngIf="isLoading">
     <app-loading-spinner
       [message]="
-        'Loading ' +
-        (currentMode === 'search' ? 'search results' : 'random icons') +
-        ' from ' +
-        currentProvider
+        (currentMode === 'search' ? 'Searching' : 'Loading') + 
+        ' icons from ' + currentProvider
       "
       size="large"
     ></app-loading-spinner>
   </div>
 
-  <!-- Load More / Footer -->
+  <!-- Load More -->
   <div class="footer" *ngIf="!isLoading">
     <button
       *ngIf="hasMore && icons.length > 0"

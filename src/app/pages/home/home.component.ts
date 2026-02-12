@@ -1,4 +1,5 @@
 // src/app/pages/home/home.component.ts
+
 import {
   Component,
   OnInit,
@@ -26,8 +27,6 @@ import { SelectionService } from '../../core/services/selection.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-
-
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef;
 
@@ -48,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private providerRegistry: ProviderRegistryService,
     private downloadService: DownloadService,
     private environment: EnvironmentService,
-    public selectionService: SelectionService
+    public selectionService: SelectionService,
   ) {
     this.limit = this.environment.defaultLimit;
   }
@@ -67,13 +66,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   private setupSearch(): void {
     this.searchControl.valueChanges
       .pipe(
-        debounceTime(this.environment.searchDebounceTime), 
-        distinctUntilChanged(), 
-        takeUntil(this.destroy$)
+        debounceTime(this.environment.searchDebounceTime),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$),
       )
       .subscribe((query) => {
+        // Only trigger search if we're in search mode or have a query
         if (query && query.trim()) {
-          this.onSearch(query);
+          this.currentMode = 'search';
+          this.resetPagination();
+          this.selectionService.clearSelection();
+          this.loadSearchResults(query);
+        } else if (query === '' || query === null) {
+          // When search is cleared, switch back to random mode
+          this.currentMode = 'random';
+          this.resetPagination();
+          this.selectionService.clearSelection();
+          this.loadRandomIcons();
         }
       });
   }
@@ -85,7 +94,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Clear search input and return to random mode
+   */
+  clearSearch(): void {
+    this.searchControl.setValue('', { emitEvent: true });
+    // No need to focus - it feels more natural to leave focus where it is
+  }
+
   onSearch(query?: string): void {
+    // This method is kept for backward compatibility but now just triggers the same logic
     const searchQuery = query || this.searchControl.value || '';
     if (searchQuery.trim()) {
       this.currentMode = 'search';
@@ -97,7 +115,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onRandom(): void {
     this.currentMode = 'random';
-    this.searchControl.setValue('');
+    this.searchControl.setValue('', { emitEvent: false }); // Don't emit to avoid triggering search
     this.resetPagination();
     this.selectionService.clearSelection();
     this.loadRandomIcons();
