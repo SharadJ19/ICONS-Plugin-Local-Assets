@@ -15,46 +15,20 @@
 }
 
 /* =====================================================
-   Header - FIXED: Powered by Quark Xpress logo (text above logo)
+   Header - UPDATED: Logo removed, just provider selector
    ===================================================== */
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-end; /* Changed from space-between to flex-end */
+  align-items: center;
   padding-bottom: 20px;
   margin-bottom: 24px;
   border-bottom: 2px solid #f1f5f9;
 }
 
-/* Brand Section - Left side with text above logo */
+/* Brand section - hidden but kept for structure */
 .brand-section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.logo-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-}
-
-.powered-by {
-  font-size: 12px;
-  font-weight: 500;
-  color: #475569;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  line-height: 1.2;
-}
-
-.brand-logo {
-  height: 40px; /* Increased from 28px */
-  width: auto;
-  object-fit: contain;
-  display: block;
-  transition: all 0.2s ease;
+  display: none;
 }
 
 /* =====================================================
@@ -407,7 +381,7 @@
 }
 
 /* =====================================================
-   Mobile Responsive - ULTRA COMPACT with larger logo
+   Mobile Responsive - ULTRA COMPACT
    ===================================================== */
 @media (max-width: 639px) {
   .container {
@@ -416,28 +390,14 @@
 
   .header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end; /* Keep provider selector on right */
     gap: 14px;
     padding-bottom: 16px;
     margin-bottom: 20px;
   }
 
   .brand-section {
-    width: 100%;
-  }
-
-  .logo-wrapper {
-    width: 100%;
-    align-items: flex-start;
-    gap: 3px;
-  }
-
-  .powered-by {
-    font-size: 11px;
-  }
-
-  .brand-logo {
-    height: 32px; /* Increased from 24px */
+    display: none; /* Ensure hidden on mobile */
   }
 
   .controls {
@@ -492,10 +452,6 @@
 @media (max-width: 360px) {
   .container {
     padding: 12px 8px 100px;
-  }
-  
-  .brand-logo {
-    height: 28px; /* Increased from 22px */
   }
   
   .icons-grid {
