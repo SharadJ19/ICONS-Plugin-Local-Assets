@@ -84,7 +84,7 @@ export class SelectionFooterComponent implements OnInit {
       
     } catch (error: unknown) {
       console.error('❌ Error:', error);
-      alert(`Failed to add icon: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      // alert(`Failed to add icon: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
@@ -115,11 +115,11 @@ export class SelectionFooterComponent implements OnInit {
       console.log(`✅ Sent first stickerbox from batch of ${icons.length}`);
       this.selectionService.clearSelection();
       
-      alert(`✓ Added "${firstIcon.displayName}" to project as stickerbox.`);
+      // alert(`✓ Added "${firstIcon.displayName}" to project as stickerbox.`);
       
     } catch (error: unknown) {
       console.error('❌ Error:', error);
-      alert(`Failed to add icons: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      // alert(`Failed to add icons: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
