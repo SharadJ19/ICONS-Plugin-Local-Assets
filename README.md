@@ -1,10 +1,10 @@
-# Iconografix - Icon Library & Search Tool
+# Icon Library & Search Tool
 
 ![Angular](https://img.shields.io/badge/Angular-16+-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Material Design](https://img.shields.io/badge/Material%20Design-757575?style=for-the-badge&logo=material-design&logoColor=white)
 ![SVG](https://img.shields.io/badge/SVG-FFB13B?style=for-the-badge&logo=svg&logoColor=white)
 
-<img src="src/favicon.png" alt="Iconografix Logo" width="200" height="200">
+<img src="src/favicon.png" alt="Icons Logo" width="200" height="200">
 
 A comprehensive, offline-first icon library application built with Angular that allows users to browse, search, and use icons from 8 popular icon libraries. Supports both standalone web usage and embedded plugin mode.
 
@@ -137,7 +137,7 @@ The application can be embedded as a plugin using Module Federation:
 
 ```typescript
 // In host application
-import('iconografix/QlPluginModule')
+import('icons/QlPluginModule')
   .then(m => {
     // Use the plugin module
   });
@@ -183,12 +183,14 @@ Edit `src/environments/environment.ts` and `environment.prod.ts`:
 export const environment = {
   production: false,
   defaultProvider: 'ICONOIR',
-  defaultLimit: 30,
+  defaultLimit: 24,
   enableDebugLogging: true,
   assetsPath: '/assets/icons',
   svgCacheTimeout: 3600000,
   doubleClickThreshold: 300,
-  searchDebounceTime: 400
+  searchDebounceTime: 400,
+  enableMultiSelect: true,
+  enablePluginMode: true
 };
 ```
 
@@ -256,7 +258,7 @@ ng test
 
 ### Building for Production
 ```bash
-ng build --configuration production
+ng build
 ```
 
 ### Code Structure Guidelines
