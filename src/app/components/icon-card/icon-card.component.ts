@@ -29,6 +29,7 @@ export class IconCardComponent implements OnInit, OnDestroy {
   svgContent: SafeHtml = '';
   isLoading = true;
   isSelected = false;
+  enableMultiSelect: boolean;
   private lastClickTime = 0;
   private readonly DOUBLE_CLICK_THRESHOLD: number;
 
@@ -42,6 +43,7 @@ export class IconCardComponent implements OnInit, OnDestroy {
     private environment: EnvironmentService
   ) {
     this.DOUBLE_CLICK_THRESHOLD = this.environment.doubleClickThreshold;
+    this.enableMultiSelect = this.environment.enableMultiSelect;
   }
 
   ngOnInit(): void {
@@ -61,18 +63,27 @@ export class IconCardComponent implements OnInit, OnDestroy {
   onCardClick(event: MouseEvent): void {
     const currentTime = Date.now();
     
-    if ((event.target as HTMLElement).closest('.selection-checkbox')) {
+    // Check if clicking on checkbox - but only relevant when multi-select is enabled
+    if (this.enableMultiSelect && (event.target as HTMLElement).closest('.selection-checkbox')) {
       event.stopPropagation();
       this.toggleSelection();
       return;
     }
 
     if (currentTime - this.lastClickTime < this.DOUBLE_CLICK_THRESHOLD) {
+      // Double click - select single icon
       this.selectionService.clearSelection();
       this.selectionService.addIcon(this.icon);
       this.lastClickTime = 0;
     } else {
-      this.toggleSelection();
+      // Single click behavior depends on multi-select setting
+      if (this.enableMultiSelect) {
+        this.toggleSelection();
+      } else {
+        // When multi-select is disabled, single click selects the icon (replaces any previous selection)
+        this.selectionService.clearSelection();
+        this.selectionService.addIcon(this.icon);
+      }
       this.lastClickTime = currentTime;
     }
   }

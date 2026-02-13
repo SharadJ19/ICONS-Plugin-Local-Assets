@@ -4,11 +4,14 @@ import { Component, OnInit } from '@angular/core';
 import { SelectionService } from '../../core/services/selection.service';
 import { Icon } from '../../core/models/icon.model';
 import { ProviderRegistryService } from '../../core/services/providers/provider-registry.service';
+import { DownloadService } from '../../core/services/download.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { QlIframeMessageService } from '../../ql-plugin/ql-default-plugin/ql-iframe-message.service';
 import { environment } from '../../../environments/environment';
+import { EnvironmentService } from '../../core/services/environment.service';
+import JSZip from 'jszip';
 
 @Component({
   selector: 'app-selection-footer',
@@ -22,6 +25,9 @@ export class SelectionFooterComponent implements OnInit {
   selectedIcons: Icon[] = [];
   isVisible = false;
   
+  // Feature flags
+  enablePluginMode: boolean;
+  
   // Target origin based on environment
   private readonly targetOrigin = environment.production 
     ? 'https://beta.quarklayout.com'
@@ -30,7 +36,11 @@ export class SelectionFooterComponent implements OnInit {
   constructor(
     private selectionService: SelectionService,
     private providerRegistry: ProviderRegistryService,
-  ) {}
+    private downloadService: DownloadService,
+    private environmentService: EnvironmentService
+  ) {
+    this.enablePluginMode = this.environmentService.enablePluginMode;
+  }
 
   ngOnInit(): void {
     this.selectionService.selectedIcons$.subscribe((icons) => {
@@ -47,6 +57,90 @@ export class SelectionFooterComponent implements OnInit {
     return 'Click to select multiple';
   }
 
+  getButtonText(): string {
+    if (this.enablePluginMode) {
+      return 'Add to Project';
+    }
+    return this.selectedCount === 1 ? 'Download SVG' : 'Download as ZIP';
+  }
+
+  getButtonIcon(): string {
+    if (this.enablePluginMode) {
+      return 'add';
+    }
+    return 'download';
+  }
+
+  async onActionClick(): Promise<void> {
+    if (this.selectedIcons.length === 0) return;
+    
+    if (this.enablePluginMode) {
+      await this.onAddToProject();
+    } else {
+      await this.onDownload();
+    }
+  }
+
+  async onDownload(): Promise<void> {
+    if (this.selectedIcons.length === 1) {
+      // Single icon download
+      await this.downloadService.downloadIcon(this.selectedIcons[0]);
+    } else if (this.selectedIcons.length > 1) {
+      // Multiple icons - create ZIP
+      await this.downloadIconsAsZip(this.selectedIcons);
+    }
+    this.selectionService.clearSelection();
+  }
+
+  private async downloadIconsAsZip(icons: Icon[]): Promise<void> {
+    try {
+      const zip = new JSZip();
+      const folder = zip.folder('icons');
+      
+      if (!folder) {
+        throw new Error('Failed to create ZIP folder');
+      }
+
+      // Load all SVG contents and add to zip
+      for (const icon of icons) {
+        const svgContent = await this.getSvgContent(icon);
+        const fileName = this.getFileName(icon);
+        folder.file(fileName, svgContent);
+      }
+
+      // Generate zip file
+      const content = await zip.generateAsync({ type: 'blob' });
+      
+      // Download zip
+      const url = URL.createObjectURL(content);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `icons_${new Date().getTime()}.zip`;
+      link.style.display = 'none';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 100);
+      
+    } catch (error) {
+      console.error('Failed to create ZIP:', error);
+    }
+  }
+
+  private getFileName(icon: Icon): string {
+    const cleanName = icon.name
+      .replace(/[^a-z0-9\s-]/gi, '')
+      .replace(/\s+/g, '_')
+      .toLowerCase();
+    
+    const providerAbbr = icon.provider.toLowerCase().substring(0, 3);
+    return `${cleanName}_${providerAbbr}.svg`;
+  }
+
   async onAddToProject(): Promise<void> {
     if (this.selectedIcons.length === 0) return;
     
@@ -59,16 +153,12 @@ export class SelectionFooterComponent implements OnInit {
 
   private async processSingleIcon(icon: Icon): Promise<void> {
     try {
-      // 1. Get SVG content
       const svgContent = await this.getSvgContent(icon);
-      
-      // 2. Convert to Base64 data URL
       const base64Data = this.convertSvgToBase64(svgContent);
       
-      // 3. ALWAYS STICKERBOX - NO CONDITIONS, NO CHECKS
       QlIframeMessageService.sendAddObject(
-        base64Data,                    // dataString: Base64 SVG
-        {                              // metaData: Any additional info
+        base64Data,
+        {
           name: icon.displayName,
           provider: icon.provider,
           fileName: `${icon.name}_${icon.provider.toLowerCase()}.svg`,
@@ -84,19 +174,15 @@ export class SelectionFooterComponent implements OnInit {
       
     } catch (error: unknown) {
       console.error('❌ Error:', error);
-      // alert(`Failed to add icon: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
   private async processMultipleIcons(icons: Icon[]): Promise<void> {
     try {
-      // SDK currently supports one icon at a time
       const firstIcon = icons[0];
-      
       const svgContent = await this.getSvgContent(firstIcon);
       const base64Data = this.convertSvgToBase64(svgContent);
       
-      // ALWAYS STICKERBOX - even for multiple icons
       QlIframeMessageService.sendAddObject(
         base64Data,
         {
@@ -115,11 +201,8 @@ export class SelectionFooterComponent implements OnInit {
       console.log(`✅ Sent first stickerbox from batch of ${icons.length}`);
       this.selectionService.clearSelection();
       
-      // alert(`✓ Added "${firstIcon.displayName}" to project as stickerbox.`);
-      
     } catch (error: unknown) {
       console.error('❌ Error:', error);
-      // alert(`Failed to add icons: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
@@ -138,20 +221,13 @@ export class SelectionFooterComponent implements OnInit {
     return svgContent;
   }
 
-  /**
-   * Convert SVG string to Base64 data URL
-   */
   private convertSvgToBase64(svgContent: string): string {
-    // Clean the SVG
     const cleanSvg = svgContent
       .replace(/[\r\n]/g, '')
       .replace(/\s+/g, ' ')
       .trim();
 
-    // Encode to Base64
     const base64 = btoa(unescape(encodeURIComponent(cleanSvg)));
-    
-    // Return as data URL
     return `data:image/svg+xml;base64,${base64}`;
   }
 

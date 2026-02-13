@@ -9,8 +9,9 @@
   matTooltipShowDelay="300"
   matTooltipHideDelay="0"
 >
-  <!-- Checkbox for multi-selection -->
+  <!-- Checkbox for multi-selection - only show when multi-select is enabled -->
   <div 
+    *ngIf="enableMultiSelect"
     class="selection-checkbox"
     [class.selected]="isSelected"
   ></div>

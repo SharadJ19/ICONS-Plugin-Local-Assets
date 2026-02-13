@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Icon } from '../models/icon.model';
+import { EnvironmentService } from './environment.service';
 
 @Injectable({ providedIn: 'root' })
 export class SelectionService {
@@ -10,7 +11,15 @@ export class SelectionService {
   
   selectedIcons$ = this.selectedIcons.asObservable();
   
+  constructor(private environment: EnvironmentService) {}
+  
   toggleIcon(icon: Icon): void {
+    // If multi-select is disabled, always select single icon
+    if (!this.environment.enableMultiSelect) {
+      this.selectSingleIcon(icon);
+      return;
+    }
+    
     const currentIcons = this.selectedIcons.value;
     const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
     
@@ -24,6 +33,12 @@ export class SelectionService {
   }
   
   addIcon(icon: Icon): void {
+    // If multi-select is disabled, always select single icon
+    if (!this.environment.enableMultiSelect) {
+      this.selectSingleIcon(icon);
+      return;
+    }
+    
     const currentIcons = this.selectedIcons.value;
     const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
     
@@ -33,6 +48,12 @@ export class SelectionService {
   }
   
   removeIcon(icon: Icon): void {
+    // If multi-select is disabled, just clear selection
+    if (!this.environment.enableMultiSelect) {
+      this.clearSelection();
+      return;
+    }
+    
     const currentIcons = this.selectedIcons.value;
     const existingIndex = currentIcons.findIndex(i => i.id === icon.id);
     

@@ -35,4 +35,13 @@ export class EnvironmentService {
   get searchDebounceTime(): number {
     return environment.searchDebounceTime;
   }
+
+  // Feature flags
+  get enableMultiSelect(): boolean {
+    return environment.enableMultiSelect;
+  }
+
+  get enablePluginMode(): boolean {
+    return environment.enablePluginMode;
+  }
 }
