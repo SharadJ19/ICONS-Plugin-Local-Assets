@@ -14,9 +14,9 @@
       Clear ({{ selectedCount }})
     </button>
     
-    <button mat-raised-button class="add-btn" (click)="onAddToProject()">
-      <mat-icon>add</mat-icon>
-      Add to Project
+    <button mat-raised-button class="add-btn" (click)="onActionClick()">
+      <mat-icon>{{ getButtonIcon() }}</mat-icon>
+      {{ getButtonText() }}
     </button>
   </div>
 </div>
