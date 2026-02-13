@@ -4,7 +4,7 @@
 ![Material Design](https://img.shields.io/badge/Material%20Design-757575?style=for-the-badge&logo=material-design&logoColor=white)
 ![SVG](https://img.shields.io/badge/SVG-FFB13B?style=for-the-badge&logo=svg&logoColor=white)
 
-<img src="src/Iconografix.png" alt="Iconografix Logo" width="500" height="300">
+<img src="src/favicon.png" alt="Iconografix Logo" width="200" height="200">
 
 A comprehensive, offline-first icon library application built with Angular that allows users to browse, search, and use icons from 8 popular icon libraries. Supports both standalone web usage and embedded plugin mode.
 
