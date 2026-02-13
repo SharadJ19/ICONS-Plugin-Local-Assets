@@ -7,5 +7,9 @@ export const environment = {
   assetsPath: '/assets/icons',
   svgCacheTimeout: 3600000,
   doubleClickThreshold: 300,
-  searchDebounceTime: 400
+  searchDebounceTime: 400,
+  
+  // Feature flags
+  enableMultiSelect: true,
+  enablePluginMode: true
 };
