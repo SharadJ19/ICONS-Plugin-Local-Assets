@@ -401,14 +401,17 @@
   }
 
   .controls {
-    flex-direction: column;
-    gap: 10px;
+     flex-direction: row; /* Change from column to row */
+    gap: 8px; /* Slightly smaller gap for mobile */
     width: 100%;
     margin-bottom: 16px;
+    align-items: center; /* Center items vertically */
   }
 
   .search-box {
-    width: 100%;
+   width: auto; /* Change from 100% to auto */
+    flex: 1; /* Take remaining space */
+    min-width: 0; /* Prevent overflow */
   }
 
   .search-input {
@@ -418,9 +421,11 @@
   }
 
   .random-btn {
-    width: 100%;
+    width: auto; /* Change from 100% to auto */
     height: 42px;
     font-size: 13px;
+    padding: 0 16px; /* Slightly smaller padding for mobile */
+    white-space: nowrap; /* Prevent button text from wrapping */
   }
 
   .results-info {
