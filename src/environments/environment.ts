@@ -1,7 +1,7 @@
 // src/environments/environment.ts
 export const environment = {
   production: false,
-  defaultProvider: 'ICONOIR',
+  defaultProvider: 'GILBARBARA',
   defaultLimit: 24,
   enableDebugLogging: true,
   assetsPath: '/assets/icons',
