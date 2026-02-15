@@ -1,4 +1,5 @@
-// src/environments/environment.prod.ts
+// PATH: src/environments\environment.prod.ts
+
 export const environment = {
   production: true,
   defaultProvider: 'GILBARBARA',
