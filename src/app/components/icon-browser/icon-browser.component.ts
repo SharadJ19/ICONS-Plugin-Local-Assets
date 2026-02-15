@@ -1,51 +1,36 @@
-// src/app/pages/home/home.component.ts
-
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+// PATH: src/app\components\icon-browser\icon-browser.component.ts
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  Subject,
-  debounceTime,
-  distinctUntilChanged,
-  takeUntil,
-  finalize,
-} from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { Icon } from '../../core/models/icon.model';
-import { IconApiResponse } from '../../core/models/icon.model';
 import { ProviderRegistryService } from '../../core/services/providers/provider-registry.service';
-import { DownloadService } from '../../core/services/download.service';
 import { EnvironmentService } from '../../core/services/environment.service';
 import { SelectionService } from '../../core/services/selection.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-icon-browser',
+  templateUrl: './icon-browser.component.html',
+  styleUrls: ['./icon-browser.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class IconBrowserComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef;
 
-  icons: Icon[] = [];
   searchControl = new FormControl('');
-  isLoading = false;
   currentProvider = 'Iconoir';
+  currentMode: 'search' | 'random' = 'random';
+  
+  // Grid state
+  icons: Icon[] = [];
+  isLoading = false;
+  hasMore = true;
+  totalIcons = 0;
 
   private offset = 0;
   private readonly limit: number;
-  hasMore = true;
-  currentMode: 'search' | 'random' = 'random';
-  private totalIcons = 0;
-
   private destroy$ = new Subject<void>();
 
   constructor(
     private providerRegistry: ProviderRegistryService,
-    private downloadService: DownloadService,
     private environment: EnvironmentService,
     public selectionService: SelectionService,
   ) {
@@ -71,7 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe((query) => {
-        if (query && query.trim()) {
+        if (query?.trim()) {
           this.currentMode = 'search';
           this.resetPagination();
           this.selectionService.clearSelection();
@@ -141,12 +126,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDownload(icon: Icon): void {
-    this.downloadService.downloadIcon(icon).catch((error) => {
-      if (this.environment.enableDebugLogging) {
-        console.error('Download failed:', error);
-      }
-    });
+  handleGridLoadMore(): void {
+    this.onLoadMore();
   }
 
   private resetPagination(): void {
@@ -159,13 +140,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.providerRegistry
       .search(query, this.limit, this.offset)
-      .pipe(
-        takeUntil(this.destroy$),
-        finalize(() => (this.isLoading = false)),
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (response) => this.handleResponse(response),
-        error: (error) => this.handleError(error),
+        next: (response) => {
+          this.icons = [...this.icons, ...response.data];
+          this.totalIcons = response.pagination.total;
+          this.hasMore = response.pagination.hasNext;
+          this.isLoading = false;
+        },
+        error: () => {
+          this.hasMore = false;
+          this.isLoading = false;
+        },
       });
   }
 
@@ -173,36 +159,30 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.providerRegistry
       .getRandom(this.limit, this.offset)
-      .pipe(
-        takeUntil(this.destroy$),
-        finalize(() => (this.isLoading = false)),
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (response) => this.handleResponse(response),
-        error: (error) => this.handleError(error),
+        next: (response) => {
+          this.icons = [...this.icons, ...response.data];
+          this.totalIcons = response.pagination.total;
+          this.hasMore = response.pagination.hasNext;
+          this.isLoading = false;
+        },
+        error: () => {
+          this.hasMore = false;
+          this.isLoading = false;
+        },
       });
-  }
-
-  private handleResponse(response: IconApiResponse): void {
-    this.icons = [...this.icons, ...response.data];
-    this.totalIcons = response.pagination.total;
-    this.hasMore = response.pagination.hasNext;
-  }
-
-  private handleError(error: any): void {
-    if (this.environment.enableDebugLogging) {
-      console.error('API Error:', error);
-    }
-    this.hasMore = false;
   }
 
   getResultCountText(): string {
     if (this.isLoading) return 'Loading...';
     if (this.icons.length === 0) return 'No icons found';
-
     if (this.totalIcons > 0) {
       return `Showing ${this.icons.length} of ${this.totalIcons} icons`;
     }
     return `Showing ${this.icons.length} icons`;
   }
 }
+
+
+

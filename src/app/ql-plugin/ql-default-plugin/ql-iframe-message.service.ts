@@ -1,4 +1,4 @@
-// src/app/ql-plugin/ql-default-plugin/ql-iframe-message.service.ts
+// PATH: src/app\ql-plugin\ql-default-plugin\ql-iframe-message.service.ts
 
 export enum IframeMessageType {
     ADD_OBJECT = 'ADD_OBJECT'
@@ -40,3 +40,6 @@ export class QlIframeMessageService {
         }, targetOrigin);
     }
 }
+
+
+

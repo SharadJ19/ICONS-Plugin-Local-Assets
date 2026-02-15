@@ -1,4 +1,4 @@
-// src\app\core\services\providers\icon-provider.interface.ts
+// PATH: src/app\core\services\providers\icon-provider.interface.ts
 
 import { Observable } from 'rxjs';
 import { IconApiResponse } from '../../models/icon.model';
@@ -19,3 +19,6 @@ export interface IconProvider {
     offset: number,
   ): Observable<IconApiResponse>;
 }
+
+
+

@@ -1,5 +1,4 @@
-// src\app\ql-plugin\ql-default-plugin\ql-default-plugin.component.spec.ts
-
+// PATH: src/app\ql-plugin\ql-default-plugin\ql-default-plugin.component.spec.ts
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -24,3 +23,6 @@ describe('QlDefaultPluginComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+

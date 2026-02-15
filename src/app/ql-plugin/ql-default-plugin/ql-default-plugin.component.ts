@@ -1,4 +1,4 @@
-// src\app\ql-plugin\ql-default-plugin\ql-default-plugin.component.ts
+// PATH: src/app\ql-plugin\ql-default-plugin\ql-default-plugin.component.ts
 
 import { Component } from '@angular/core';
 
@@ -10,3 +10,6 @@ import { Component } from '@angular/core';
 
 
 export class QlDefaultPluginComponent {}
+
+
+

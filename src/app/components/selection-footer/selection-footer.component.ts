@@ -1,5 +1,4 @@
-// src/app/components/selection-footer/selection-footer.component.ts
-
+// PATH: src/app\components\selection-footer\selection-footer.component.ts
 import { Component, OnInit } from '@angular/core';
 import { SelectionService } from '../../core/services/selection.service';
 import { Icon } from '../../core/models/icon.model';
@@ -235,3 +234,6 @@ export class SelectionFooterComponent implements OnInit {
     this.selectionService.clearSelection();
   }
 }
+
+
+

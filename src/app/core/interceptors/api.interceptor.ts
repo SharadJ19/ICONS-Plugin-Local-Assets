@@ -1,5 +1,4 @@
-// src\app\core\interceptors\api.interceptor.ts
-
+// PATH: src/app\core\interceptors\api.interceptor.ts
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -37,3 +36,6 @@ export class ApiInterceptor implements HttpInterceptor {
     );
   }
 }
+
+
+

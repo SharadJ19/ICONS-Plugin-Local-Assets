@@ -1,4 +1,4 @@
-/* src\app\app.component.css */
+/* PATH: src/app\app.component.css */
 
 :host {
   display: block;
@@ -36,3 +36,6 @@
 :host *::after {
   box-sizing: border-box;
 }
+
+
+

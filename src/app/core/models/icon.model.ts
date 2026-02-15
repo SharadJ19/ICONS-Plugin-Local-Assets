@@ -1,4 +1,4 @@
-// src\app\core\models\icon.model.ts
+// PATH: src/app\core\models\icon.model.ts
 export interface Icon {
   id: string;
   name: string;
@@ -18,3 +18,6 @@ export interface IconApiResponse {
     hasNext: boolean;
   };
 }
+
+
+

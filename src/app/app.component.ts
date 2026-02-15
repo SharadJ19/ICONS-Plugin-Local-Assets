@@ -1,4 +1,4 @@
-// src\app\app.component.ts
+// PATH: src/app\app.component.ts
 
 import { Component } from '@angular/core';
 
@@ -15,5 +15,8 @@ import { Component } from '@angular/core';
 
 
 export class AppComponent {
-  title = 'Iconografix';
+  title = 'Icons';
 }
+
+
+

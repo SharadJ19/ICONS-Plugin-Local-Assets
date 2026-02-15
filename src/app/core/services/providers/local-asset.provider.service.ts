@@ -1,4 +1,5 @@
-// src/app/core/services/providers/local-asset.provider.service.ts
+// PATH: src/app\core\services\providers\local-asset.provider.service.ts
+
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -171,3 +172,6 @@ export class LocalAssetProviderService extends BaseProviderService {
     );
   }
 }
+
+
+
