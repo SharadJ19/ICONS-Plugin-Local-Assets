@@ -8,7 +8,7 @@ module.exports = withModuleFederationPlugin({
   exposes: {
     './QlPluginModule': './src/app/ql-plugin/ql-plugin.module.ts',
     './QlDefaultPluginComponent': './src/app/ql-plugin/ql-default-plugin/ql-default-plugin.component.ts',
-    './HomeComponent': './src/app/pages/home/home.component.ts'
+    './IconBrowserComponent': './src/app/components/icon-browser/icon-browser.component.ts',
   },
   
   shared: {
