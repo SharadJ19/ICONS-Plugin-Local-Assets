@@ -1,4 +1,5 @@
-// src/app/core/services/environment.service.ts
+// PATH: src/app\core\services\environment.service.ts
+
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
@@ -45,3 +46,6 @@ export class EnvironmentService {
     return environment.enablePluginMode;
   }
 }
+
+
+

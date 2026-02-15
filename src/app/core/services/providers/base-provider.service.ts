@@ -1,4 +1,4 @@
-// src\app\core\services\providers\base-provider.service.ts
+// PATH: src/app\core\services\providers\base-provider.service.ts
 
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -86,3 +86,6 @@ export abstract class BaseProviderService {
            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }
 }
+
+
+

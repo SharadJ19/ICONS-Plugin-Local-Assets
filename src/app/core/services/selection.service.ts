@@ -1,4 +1,4 @@
-// src\app\core\services\selection.service.ts
+// PATH: src/app\core\services\selection.service.ts
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -84,3 +84,5 @@ export class SelectionService {
     this.selectedIcons.next([]);
   }
 }
+
+

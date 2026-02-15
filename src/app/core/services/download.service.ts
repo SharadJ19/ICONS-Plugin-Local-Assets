@@ -1,4 +1,4 @@
-// src\app\core\services\download.service.ts
+// PATH: src/app\core\services\download.service.ts
 
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -72,3 +72,6 @@ export class DownloadService {
     return `${cleanName}_${providerAbbr}.svg`;
   }
 }
+
+
+
