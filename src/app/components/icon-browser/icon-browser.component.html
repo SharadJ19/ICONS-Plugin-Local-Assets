@@ -1,0 +1,61 @@
+<!-- PATH: src/app/components/icon-browser/icon-browser.component.html -->
+<div class="container">
+  <!-- Header - Just provider selector on the right -->
+  <header class="header">
+    <div class="brand-section"></div>
+    <app-provider-selector
+      (providerChange)="onProviderChange($event)"
+    ></app-provider-selector>
+  </header>
+
+  <!-- Controls - Search and Provider side by side -->
+  <div class="controls">
+    <!-- Search bar takes more space -->
+    <div class="search-box">
+      <div class="search-input-wrapper">
+        <mat-icon class="search-icon">search</mat-icon>
+        
+        <input
+          type="text"
+          [formControl]="searchControl"
+          placeholder="Search icons..."
+          class="search-input"
+          #searchInput
+        />
+        
+        <button 
+          *ngIf="searchControl.value"
+          class="clear-search-btn"
+          (click)="clearSearch()"
+          type="button"
+          matTooltip="Clear search"
+          matTooltipPosition="right"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Provider selector - moved from header to controls -->
+    <app-provider-selector
+      (providerChange)="onProviderChange($event)"
+    ></app-provider-selector>
+  </div>
+
+  <!-- Icon Grid Component -->
+  <app-icon-grid
+    [icons]="icons"
+    [isLoading]="isLoading"
+    [hasMore]="hasMore"
+    [currentProvider]="currentProvider"
+    [currentMode]="currentMode"
+    [resultCountText]="getResultCountText()"
+    [searchQuery]="searchControl.value"
+    (loadMore)="onLoadMore()"
+    (randomClick)="onRandom()"
+    (downloadIcon)="selectionService.toggleIcon($event)"
+  ></app-icon-grid>
+</div>
+
+<!-- Selection Footer -->
+<app-selection-footer></app-selection-footer>
