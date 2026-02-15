@@ -1,4 +1,4 @@
-// src\app\ql-plugin\ql-plugin-routing.module.ts
+// PATH: src/app\ql-plugin\ql-plugin-routing.module.ts
 
 import { NgModule } from '@angular/core';
 import { QlDefaultPluginComponent } from './ql-default-plugin/ql-default-plugin.component';
@@ -18,3 +18,6 @@ const routes: Routes = [
 
 
 export class QlPluginRoutingModule {}
+
+
+

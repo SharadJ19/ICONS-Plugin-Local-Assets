@@ -1,4 +1,5 @@
-// src\app\app.module.ts
+// PATH: src/app\app.module.ts
+
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,12 +10,11 @@ import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { AppComponent } from './app.component';
 import { QlPluginModule } from './ql-plugin/ql-plugin.module';
 import { AppRoutingModule } from './app-routing.module';
-import { MatTooltipModule } from '@angular/material/tooltip'; // Add this import
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,  // ONLY AppComponent here!
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'; // Add this import
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    QlPluginModule,
+    QlPluginModule,  // This imports all your components
     MatTooltipModule,
   ],
   providers: [
@@ -34,6 +34,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'; // Add this import
   ],
   bootstrap: [AppComponent],
 })
-
-
 export class AppModule { }
+
+
+
