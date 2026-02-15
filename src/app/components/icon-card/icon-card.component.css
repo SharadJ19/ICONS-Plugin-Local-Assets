@@ -1,5 +1,4 @@
-/* src\app\components\icon-card\icon-card.component.css */
-
+/* PATH: src/app\components\icon-card\icon-card.component.css */
 :host {
   display: block;
   height: 100%;
@@ -141,3 +140,6 @@
     font-size: 12px;
   }
 }
+
+
+

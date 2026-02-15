@@ -1,5 +1,4 @@
-// src\app\components\loading-spinner\loading-spinner.component.ts
-
+// PATH: src/app\components\loading-spinner\loading-spinner.component.ts
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -11,3 +10,6 @@ export class LoadingSpinnerComponent {
   @Input() message = 'Loading...';
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
 }
+
+
+

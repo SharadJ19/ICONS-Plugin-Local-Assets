@@ -1,4 +1,4 @@
-// src/app/components/icon-card/icon-card.component.ts
+// PATH: src/app\components\icon-card\icon-card.component.ts
 import {
   Component,
   Input,

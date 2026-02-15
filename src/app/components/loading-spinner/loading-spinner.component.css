@@ -1,5 +1,4 @@
-/* src\app\components\loading-spinner\loading-spinner.component.css */
-
+/* PATH: src/app\components\loading-spinner\loading-spinner.component.css */
 :host {
   display: block;
 }
@@ -93,3 +92,6 @@
     max-width: 240px;
   }
 }
+
+
+

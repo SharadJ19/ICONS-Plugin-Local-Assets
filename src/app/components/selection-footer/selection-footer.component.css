@@ -1,5 +1,4 @@
-/* src\app\components\selection-footer\selection-footer.component.css */
-
+/* PATH: src/app\components\selection-footer\selection-footer.component.css */
 .selection-footer {
   position: fixed;
   bottom: 0;
@@ -125,3 +124,5 @@
     min-height: 44px;
   }
 }
+
+

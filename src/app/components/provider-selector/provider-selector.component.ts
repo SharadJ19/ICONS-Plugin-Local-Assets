@@ -1,5 +1,4 @@
-// src\app\components\provider-selector\provider-selector.component.ts
-
+// PATH: src/app\components\provider-selector\provider-selector.component.ts
 import {
   Component,
   OnInit,
@@ -60,3 +59,6 @@ export class ProviderSelectorComponent implements OnInit {
     }
   }
 }
+
+
+
