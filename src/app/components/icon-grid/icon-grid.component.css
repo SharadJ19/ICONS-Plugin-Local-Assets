@@ -3,7 +3,6 @@
   display: block;
 }
 
-/* Results Info */
 .results-info {
   display: flex;
   align-items: center;
@@ -33,7 +32,6 @@
   border: 1px solid rgba(255, 145, 0, 0.2);
 }
 
-/* Icons Grid - ULTRA COMPACT */
 .icons-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -83,7 +81,6 @@
   }
 }
 
-/* Empty State */
 .empty-state {
   text-align: center;
   padding: 48px 20px;
@@ -143,14 +140,12 @@
   box-shadow: 0 4px 12px rgba(255, 145, 0, 0.3);
 }
 
-/* Loading Section */
 .loading-section {
   margin: 40px 0;
   display: flex;
   justify-content: center;
 }
 
-/* Load More */
 .footer {
   display: flex;
   justify-content: center;
@@ -181,7 +176,6 @@
   box-shadow: 0 4px 10px rgba(255, 145, 0, 0.15);
 }
 
-/* Mobile Responsive */
 @media (max-width: 639px) {
   .results-info {
     padding: 8px 12px;
@@ -196,6 +190,3 @@
     padding: 40px 16px;
   }
 }
-
-
-

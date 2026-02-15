@@ -46,6 +46,3 @@ export class EnvironmentService {
     return environment.enablePluginMode;
   }
 }
-
-
-

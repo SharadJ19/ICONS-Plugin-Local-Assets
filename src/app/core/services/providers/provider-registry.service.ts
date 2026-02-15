@@ -165,6 +165,3 @@ export class ProviderRegistryService {
     return stats;
   }
 }
-
-
-

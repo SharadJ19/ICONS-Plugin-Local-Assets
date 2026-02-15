@@ -19,6 +19,3 @@ export interface IconProvider {
     offset: number,
   ): Observable<IconApiResponse>;
 }
-
-
-

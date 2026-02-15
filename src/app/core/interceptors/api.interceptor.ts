@@ -36,6 +36,3 @@ export class ApiInterceptor implements HttpInterceptor {
     );
   }
 }
-
-
-

@@ -72,6 +72,3 @@ export class DownloadService {
     return `${cleanName}_${providerAbbr}.svg`;
   }
 }
-
-
-

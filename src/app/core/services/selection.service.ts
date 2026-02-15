@@ -84,5 +84,3 @@ export class SelectionService {
     this.selectedIcons.next([]);
   }
 }
-
-

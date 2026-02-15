@@ -10,6 +10,3 @@ export class LoadingSpinnerComponent {
   @Input() message = 'Loading...';
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
 }
-
-
-

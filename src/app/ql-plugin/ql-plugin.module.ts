@@ -1,6 +1,4 @@
 // PATH: src/app\ql-plugin\ql-plugin.module.ts
-
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QlPluginRoutingModule } from './ql-plugin-routing.module';
@@ -27,7 +25,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoadingSpinnerComponent,
     IconBrowserComponent,
     IconGridComponent,
-    // HomeComponent is REMOVED from here
   ],
   imports: [
     CommonModule,
@@ -47,9 +44,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     IconGridComponent,
   ],
 })
+
+
 export class QlPluginModule {
   static rootComponent = QlDefaultPluginComponent;
 }
-
-
-

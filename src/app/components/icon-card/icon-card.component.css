@@ -58,8 +58,6 @@
   transform: scale(1.1);
 }
 
-/* Update the .selection-checkbox rule */
-
 .selection-checkbox {
   position: absolute;
   top: 8px;
@@ -94,7 +92,6 @@
   font-weight: bold;
 }
 
-/* Prevent checkbox from triggering card click */
 .selection-checkbox-label {
   position: absolute;
   top: 0;
@@ -105,7 +102,6 @@
   z-index: 5;
 }
 
-/* Loading state */
 .icon-card.loading {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
@@ -117,7 +113,6 @@
   100% { background-position: -200% 0; }
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .icon-preview {
     padding: 16px;
@@ -140,6 +135,3 @@
     font-size: 12px;
   }
 }
-
-
-

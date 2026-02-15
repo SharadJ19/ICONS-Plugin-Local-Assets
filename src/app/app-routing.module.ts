@@ -1,6 +1,4 @@
 // PATH: src/app\app-routing.module.ts
-
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IconBrowserComponent } from './components/icon-browser/icon-browser.component'; // Import directly
@@ -19,7 +17,5 @@ const routes: Routes = [
   })],
   exports: [RouterModule],
 })
+
 export class AppRoutingModule {}
-
-
-

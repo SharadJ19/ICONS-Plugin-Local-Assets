@@ -1,5 +1,4 @@
 /* PATH: src/app\app.component.css */
-
 :host {
   display: block;
   min-height: 100vh;
@@ -36,6 +35,3 @@
 :host *::after {
   box-sizing: border-box;
 }
-
-
-

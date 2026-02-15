@@ -13,16 +13,11 @@
   min-height: 100vh;
 }
 
-/* =====================================================
-   Header - REMOVED provider selector, now just empty
-   ===================================================== */
 .header {
-  display: none; /* Hide the header since we moved provider selector */
+  display: none; 
 }
 
-/* =====================================================
-   Controls - Search and Provider side by side
-   ===================================================== */
+
 .controls {
   display: flex;
   gap: 12px;
@@ -31,8 +26,8 @@
 }
 
 .search-box {
-  flex: 1; /* Takes remaining space */
-  min-width: 0; /* Prevents flex overflow */
+  flex: 1;
+  min-width: 0; 
 }
 
 .search-input-wrapper {
@@ -78,7 +73,6 @@
   font-weight: 400;
 }
 
-/* Clear button - elegant X */
 .clear-search-btn {
   position: absolute;
   right: 10px;
@@ -114,12 +108,11 @@
   line-height: 16px;
 }
 
-/* Provider selector takes only what it needs */
+
 .controls app-provider-selector {
-  flex-shrink: 0; /* Prevents shrinking */
+  flex-shrink: 0; 
 }
 
-/* Mobile Responsive */
 @media (max-width: 639px) {
   .container {
     padding: 16px 10px 100px;
@@ -151,7 +144,6 @@
   }
 }
 
-/* Better touch targets */
 @media (max-width: 768px) {
   .clear-search-btn {
     width: 28px;
@@ -165,14 +157,12 @@
   }
 }
 
-/* Focus states */
 :focus-visible {
   outline: 2px solid #ff9100;
   outline-offset: 2px;
   border-radius: 22px;
 }
 
-/* Animation for clear button */
 .clear-search-btn {
   animation: fadeScale 0.15s ease;
 }

@@ -172,6 +172,3 @@ export class LocalAssetProviderService extends BaseProviderService {
     );
   }
 }
-
-
-

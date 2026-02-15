@@ -234,6 +234,3 @@ export class SelectionFooterComponent implements OnInit {
     this.selectionService.clearSelection();
   }
 }
-
-
-

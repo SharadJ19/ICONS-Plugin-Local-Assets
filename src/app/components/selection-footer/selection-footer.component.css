@@ -117,12 +117,9 @@
   }
 }
 
-/* Better touch targets */
 @media (max-width: 768px) {
   .clear-btn,
   .add-btn {
     min-height: 44px;
   }
 }
-
-

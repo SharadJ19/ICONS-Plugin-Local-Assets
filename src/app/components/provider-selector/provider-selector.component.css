@@ -212,13 +212,9 @@
   }
 }
 
-/* Better touch targets */
 @media (max-width: 768px) {
   .filter-btn,
   .dropdown-item {
     min-height: 44px;
   }
 }
-
-
-
